@@ -1,0 +1,31 @@
+{
+  "name": "stencil-starter-project-name",
+  "private": true,
+  "version": "0.0.1",
+  "description": "stencil-starter-project-name",
+  "license": "MIT",
+  "files": [
+    "dist/"
+  ],
+  "scripts": {
+    "build": "stencil build",
+    "start": "stencil build --dev --watch --serve",
+    "test": "stencil test --spec --e2e",
+    "test.watch": "stencil test --spec --e2e --watch",
+    "generate": "stencil generate"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^3.4.1",
+    "@ionic/core": "^5.3.2",
+    "@stencil/core": "^2.13.0",
+    "@types/jest": "^27.0.3",
+    "jest": "^27.4.5",
+    "jest-cli": "^27.4.5",
+    "puppeteer": "^10.0.0"
+  },
+  "dependencies": {
+    "@capacitor/android": "^3.4.1",
+    "@capacitor/core": "^3.4.1",
+    "@stencil/store": "^1.5.0"
+  }
+}

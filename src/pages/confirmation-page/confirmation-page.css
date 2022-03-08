@@ -1,0 +1,29 @@
+.report {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+}
+
+.report-image {
+  position: relative;
+}
+
+.circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  border: transparent var(--ion-color-primary) solid;
+  padding: 122px;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.score {
+  font-size: 60px;
+  color: #e8ac68;
+  font-family: 'Poppins';
+}
