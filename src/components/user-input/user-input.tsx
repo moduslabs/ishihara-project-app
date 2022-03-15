@@ -1,49 +1,56 @@
-import { Component, h, Prop } from '@stencil/core';
+import { Component, Element, h, Prop } from '@stencil/core';
 import { updateStateWithUserInput } from '../../helpers/utils';
 import state from '../../store';
 
-const nav = document.querySelector('ion-nav');
+//const nav = document.querySelector('ion-nav');
 
 export type Plate = {
-    key: string;
-    url: string;
-    answer?: null | string | number
-}
+  key: string;
+  url: string;
+  answer?: null | string | number;
+};
 
 @Component({
   tag: 'user-input',
   styleUrl: 'user-input.css',
 })
 export class UserInput {
-  @Prop() next: string;
+  @Element() el: HTMLElement;
   @Prop() plate: Plate;
-  @Prop() answer: HTMLIonInputElement;  
+  @Prop() answer: HTMLIonInputElement;
 
-
-  handleFormSubmit(evt: Event) {
-    evt.preventDefault();
-    this.plate.answer = this.answer.value
-    state.plates = updateStateWithUserInput(state.plates, this.plate)
-    console.log(state.plates)
-    nav.push(this.next);
+  componentDidLoad() {
+    console.log(this.el.querySelector('ion-slides'))
   }
+
+  handleFormSubmit() {
+   // evt.preventDefault();
+   console.log(this)
+   //console.log(this.slider)
+    this.plate.answer = this.answer.value;
+    state.plates = updateStateWithUserInput(state.plates, this.plate);
+    //nav.push(this.next);
+  }
+
 
   render() {
     return [
       <ion-grid>
-        <form onSubmit={this.handleFormSubmit.bind(this)}>
+        <form >
           <ion-row class="input-container">
             <ion-label>Enter what you see</ion-label>
-            <ion-input ref={el => this.answer = el} ></ion-input>
+            <ion-col>
+              <ion-input ref={el => (this.answer = el)}></ion-input>
+            </ion-col>
           </ion-row>
           <ion-row>
             <ion-col>
-              <ion-button type="submit" expand="block">
-                Skip
+              <ion-button  expand="block">
+                Previous
               </ion-button>
             </ion-col>
             <ion-col>
-              <ion-button type="submit" expand="block">
+              <ion-button  onClick={this.handleFormSubmit.bind(this)} expand="block">
                 Next
               </ion-button>
             </ion-col>

@@ -38,13 +38,18 @@ body {
   font-family: 'Montserrat', sans-serif;
 }
 
-.sc-ion-input-md-h { 
+.sc-ion-input-md-h, .sc-ion-input-ios-h  { 
   background: #ededed;
   border-radius: 3px;
   margin-bottom: 20px;
   text-align: center;
 }
 
-.sc-ion-label-md-h {
+
+.sc-ion-label-md-h, .sc-ion-label-ios-h  {
   font-size: 14px;
+}
+
+button:active {
+  color: var(--ion-color-primary);
 }

@@ -5,7 +5,8 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { Plate } from "./components/user-input/user-input";
+import { Plate } from "./pages/slider/page-five";
+import { Plate as Plate1 } from "./components/user-input/user-input";
 export namespace Components {
     interface AppHome {
     }
@@ -13,19 +14,14 @@ export namespace Components {
     }
     interface ConfirmationPage {
     }
-    interface PageFive {
-    }
-    interface PageFour {
-    }
     interface PageOne {
     }
-    interface PageThree {
-    }
-    interface PageTwo {
+    interface SlidesPhoto {
+        "plate": Plate;
+        "value": string;
     }
     interface UserInput {
         "answer": HTMLIonInputElement;
-        "next": string;
         "plate": Plate;
     }
 }
@@ -48,35 +44,17 @@ declare global {
         prototype: HTMLConfirmationPageElement;
         new (): HTMLConfirmationPageElement;
     };
-    interface HTMLPageFiveElement extends Components.PageFive, HTMLStencilElement {
-    }
-    var HTMLPageFiveElement: {
-        prototype: HTMLPageFiveElement;
-        new (): HTMLPageFiveElement;
-    };
-    interface HTMLPageFourElement extends Components.PageFour, HTMLStencilElement {
-    }
-    var HTMLPageFourElement: {
-        prototype: HTMLPageFourElement;
-        new (): HTMLPageFourElement;
-    };
     interface HTMLPageOneElement extends Components.PageOne, HTMLStencilElement {
     }
     var HTMLPageOneElement: {
         prototype: HTMLPageOneElement;
         new (): HTMLPageOneElement;
     };
-    interface HTMLPageThreeElement extends Components.PageThree, HTMLStencilElement {
+    interface HTMLSlidesPhotoElement extends Components.SlidesPhoto, HTMLStencilElement {
     }
-    var HTMLPageThreeElement: {
-        prototype: HTMLPageThreeElement;
-        new (): HTMLPageThreeElement;
-    };
-    interface HTMLPageTwoElement extends Components.PageTwo, HTMLStencilElement {
-    }
-    var HTMLPageTwoElement: {
-        prototype: HTMLPageTwoElement;
-        new (): HTMLPageTwoElement;
+    var HTMLSlidesPhotoElement: {
+        prototype: HTMLSlidesPhotoElement;
+        new (): HTMLSlidesPhotoElement;
     };
     interface HTMLUserInputElement extends Components.UserInput, HTMLStencilElement {
     }
@@ -88,11 +66,8 @@ declare global {
         "app-home": HTMLAppHomeElement;
         "app-root": HTMLAppRootElement;
         "confirmation-page": HTMLConfirmationPageElement;
-        "page-five": HTMLPageFiveElement;
-        "page-four": HTMLPageFourElement;
         "page-one": HTMLPageOneElement;
-        "page-three": HTMLPageThreeElement;
-        "page-two": HTMLPageTwoElement;
+        "slides-photo": HTMLSlidesPhotoElement;
         "user-input": HTMLUserInputElement;
     }
 }
@@ -103,30 +78,22 @@ declare namespace LocalJSX {
     }
     interface ConfirmationPage {
     }
-    interface PageFive {
-    }
-    interface PageFour {
-    }
     interface PageOne {
     }
-    interface PageThree {
-    }
-    interface PageTwo {
+    interface SlidesPhoto {
+        "plate"?: Plate;
+        "value"?: string;
     }
     interface UserInput {
         "answer"?: HTMLIonInputElement;
-        "next"?: string;
         "plate"?: Plate;
     }
     interface IntrinsicElements {
         "app-home": AppHome;
         "app-root": AppRoot;
         "confirmation-page": ConfirmationPage;
-        "page-five": PageFive;
-        "page-four": PageFour;
         "page-one": PageOne;
-        "page-three": PageThree;
-        "page-two": PageTwo;
+        "slides-photo": SlidesPhoto;
         "user-input": UserInput;
     }
 }
@@ -137,11 +104,8 @@ declare module "@stencil/core" {
             "app-home": LocalJSX.AppHome & JSXBase.HTMLAttributes<HTMLAppHomeElement>;
             "app-root": LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;
             "confirmation-page": LocalJSX.ConfirmationPage & JSXBase.HTMLAttributes<HTMLConfirmationPageElement>;
-            "page-five": LocalJSX.PageFive & JSXBase.HTMLAttributes<HTMLPageFiveElement>;
-            "page-four": LocalJSX.PageFour & JSXBase.HTMLAttributes<HTMLPageFourElement>;
             "page-one": LocalJSX.PageOne & JSXBase.HTMLAttributes<HTMLPageOneElement>;
-            "page-three": LocalJSX.PageThree & JSXBase.HTMLAttributes<HTMLPageThreeElement>;
-            "page-two": LocalJSX.PageTwo & JSXBase.HTMLAttributes<HTMLPageTwoElement>;
+            "slides-photo": LocalJSX.SlidesPhoto & JSXBase.HTMLAttributes<HTMLSlidesPhotoElement>;
             "user-input": LocalJSX.UserInput & JSXBase.HTMLAttributes<HTMLUserInputElement>;
         }
     }

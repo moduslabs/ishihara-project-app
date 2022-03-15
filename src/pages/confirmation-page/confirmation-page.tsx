@@ -6,7 +6,7 @@ import state from '../../store';
   styleUrl: 'confirmation-page.css',
 })
 export class ConfirmationPage {
-  @State() score = state.plates.filter((plate) => plate.key === plate.answer.toUpperCase())
+  @State() score = state.plates.filter((plate) => plate.key === plate.answer)
 
   render() {
     return [

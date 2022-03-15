@@ -1,6 +1,6 @@
 {
-  "appId": "com.example.app",
-  "appName": "test-prog",
+  "appId": "com.modus.ishihara.app",
+  "appName": "ishihara",
   "webDir": "www",
   "bundledWebRuntime": false
 }

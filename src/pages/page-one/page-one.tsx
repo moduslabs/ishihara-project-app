@@ -23,7 +23,7 @@ export class PageOne {
         <div class="image-container">
           <img src={this.plateData.url} alt="plate one" />
         </div>
-        <user-input next="page-two" plate={this.plateData} ></user-input>
+        {/* <user-input next="page-two" plate={this.plateData} ></user-input> */}
       </ion-content>,
     ];
   }

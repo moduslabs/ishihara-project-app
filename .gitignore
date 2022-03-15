@@ -21,6 +21,7 @@ node_modules/
 $RECYCLE.BIN/
 
 android/
+ios/
 
 .DS_Store
 Thumbs.db

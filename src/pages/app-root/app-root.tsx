@@ -18,12 +18,8 @@ export class AppRoot {
       <ion-app>
         <ion-router useHash={false}>
           <ion-route url="/" component="app-home" />
-          <ion-route url="/page/one" component="page-one" />
-          <ion-route url="/page/two" component="page-two" />
-          <ion-route url="/page/three" component="page-three" />
-          <ion-route url="/page/four" component="page-four" />
-          <ion-route url="/page/five" component="page-five" />
           <ion-route url="/page/confirmation" component="confirmation-page" />
+          <ion-route url="/page/slides" component="slides-photo" />
         </ion-router>
         <ion-nav />
       </ion-app>

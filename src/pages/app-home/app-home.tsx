@@ -19,7 +19,7 @@ export class AppHome {
         </div>
         <h3 class="caption">Optometry Color Deficiency Test App</h3>
         <p>The Ishihara test is a color perception test for color deficiencies, the first in a class of successful color vision tests called pseudo-isochromatic plates</p>
-        <ion-button href="/page/one" expand="block">
+        <ion-button href="/page/slides" expand="block">
           Get Started
         </ion-button>
       </ion-content>

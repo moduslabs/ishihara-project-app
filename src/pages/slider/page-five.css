@@ -1,0 +1,12 @@
+.swiper-container .swiper-slide {
+  display: grid;
+}
+
+.input-container {
+  display: grid;
+}
+
+.swiper-slide img {
+    margin: 50px 0;
+    width: 350px !important;
+}
