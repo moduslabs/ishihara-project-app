@@ -1,16 +1,21 @@
 import { Component, h } from '@stencil/core';
 import { fetchPlates } from '../../helpers/utils';
-import state from '../../store'
+import state from '../../store';
 
 @Component({
   tag: 'app-root',
   styleUrl: 'app-root.css',
 })
 export class AppRoot {
-
+  
   async componentWillLoad() {
-    const plates = await fetchPlates();
-    state.plates = plates.map((plate) => ({...plate, answer: null}))
+    try {
+      const plates = await fetchPlates();
+      state.plates = plates.map(plate => ({ ...plate, answer: null }));
+    } catch (error) {
+      //TODO display error message to users
+      console.log(error);
+    }
   }
 
   render() {

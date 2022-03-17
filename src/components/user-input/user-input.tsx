@@ -24,12 +24,8 @@ export class UserInput {
   }
 
   handleFormSubmit() {
-   // evt.preventDefault();
-   console.log(this)
-   //console.log(this.slider)
     this.plate.answer = this.answer.value;
     state.plates = updateStateWithUserInput(state.plates, this.plate);
-    //nav.push(this.next);
   }
 
 
