@@ -27,3 +27,33 @@
   color: #e8ac68;
   font-family: 'Poppins';
 }
+
+.header-row {
+  font-weight: 700;
+}
+
+.flawless {
+  color: green;
+}
+
+.flawed {
+  color: red;
+}
+
+.no-answer {
+  color: grey;
+}
+
+ion-col {
+  padding: 16px 8px;
+  border-bottom: 1px solid black;
+  border-right: 1px solid black;
+}
+
+ion-col:first-child {
+  border-left: 1px solid black;
+}
+
+.header-row ion-col {
+  border-top: 1px solid black;
+}
