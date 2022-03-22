@@ -7,33 +7,27 @@ import state from '../../store';
   styleUrl: 'confirmation-page.css',
 })
 export class ConfirmationPage {
-  @State() score = state.plates.filter(plate => plate.key === plate.answer);
+  @State() correctPlates = state.plates.filter(plate => plate.key === plate.answer);
 
   render() {
-    console.log('Scores', this.score);
-    console.log('Plates', state.plates);
+    const scorePercentage = ((this.correctPlates.length / state.plates.length) * 100).toFixed(0);
     return [
       <ion-header>
         <ion-toolbar color="primary">
-          <ion-buttons slot="start">
-            <ion-back-button defaultHref="/confirmation/page" />
-          </ion-buttons>
           <ion-title>Color Deficiency Test Report</ion-title>
         </ion-toolbar>
       </ion-header>,
 
       <ion-content class="ion-padding">
-        <div class="image-container report-image">
-          <img src="/assets/images/cover-isihara.png" alt="Ishihara" />
-          <div class="report">
-            <div class="circle">
-              <span class="score">
-                {this.score.length}/{state.plates.length}
-              </span>
-            </div>
-          </div>
+        <div class="result">
+          <h2>Test result</h2>
+          <p>
+            {this.correctPlates.length}/{state.plates.length} ({scorePercentage}%)
+          </p>
+          <ion-button href="/">Retake</ion-button>
         </div>
-        <ion-grid>
+
+        <ion-grid class="result-table">
           <ion-row class="header-row">
             <ion-col size="4">Plate</ion-col>
             <ion-col size="4">Your Answer</ion-col>
