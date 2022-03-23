@@ -3,6 +3,7 @@ import { Component, Prop, h } from '@stencil/core';
 @Component({
   tag: 'app-button',
   styleUrl: 'button.css',
+  shadow: true,
 })
 export class Button {
   @Prop() to?: string;

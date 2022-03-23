@@ -10,6 +10,7 @@ export type Plate = {
 @Component({
   tag: 'app-layout',
   styleUrl: 'layout.css',
+  scoped: true,
 })
 export class Layout {
   @Prop() hasBack: boolean = false;
@@ -30,7 +31,7 @@ export class Layout {
               </ion-title>
             </ion-toolbar>
           </ion-header>
-          <ion-content class="ion-padding">
+          <ion-content>
             <slot />
           </ion-content>
           <ion-footer>

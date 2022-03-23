@@ -12,6 +12,7 @@ export type Plate = {
 @Component({
   tag: 'app-slider',
   styleUrl: 'slider.css',
+  scoped: true,
 })
 export class SliderPage {
   @Element() el: HTMLElement;
@@ -48,11 +49,11 @@ export class SliderPage {
   render() {
     return (
       <div>
-        <h2 class="heading">Color Deficiency Test</h2>
+        <h2>Color Deficiency Test</h2>
         <ion-slides options={this.slideOpts}>
           {this.plates?.map((plate, index) => (
             <ion-slide>
-              <div class="image-container">
+              <div class="plate">
                 <img src={plate.url} alt="plate two" />
                 <span>
                   {index + 1}/{this.plates.length}

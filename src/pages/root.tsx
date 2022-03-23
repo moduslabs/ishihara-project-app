@@ -4,10 +4,8 @@ import { loadPlates } from '../helpers/utils';
 
 @Component({
   tag: 'app-root',
-  styleUrl: 'root.css',
 })
 export class AppRoot {
-  @State() count: number = 0;
   @State() hasBack: boolean = false;
 
   async componentWillLoad() {
@@ -15,8 +13,6 @@ export class AppRoot {
   }
 
   async handlePageEnter(e) {
-    this.count++;
-    console.log('A: ', e.detail);
     this.hasBack = e.detail.to === routes.slides.url;
     if (e.detail.from && e.detail.to === routes.home.url) {
       await loadPlates();

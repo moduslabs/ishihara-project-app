@@ -8,14 +8,29 @@
   line-height: 1;
   font-weight: 400;
 }
+
 .result p {
   font-size: 50px;
   margin: 16px 0;
   font-weight: 400;
 }
 
-.header-row {
+.table ion-col {
+  padding: 16px 8px;
+  border-bottom: 1px solid black;
+  border-right: 1px solid black;
+}
+
+.table ion-col:first-child {
+  border-left: 1px solid black;
+}
+
+.table-header {
   font-weight: 700;
+}
+
+.table .table-header ion-col {
+  border-top: 1px solid black;
 }
 
 .flawless {
@@ -28,18 +43,4 @@
 
 .no-answer {
   color: grey;
-}
-
-.result-table ion-col {
-  padding: 16px 8px;
-  border-bottom: 1px solid black;
-  border-right: 1px solid black;
-}
-
-.result-table ion-col:first-child {
-  border-left: 1px solid black;
-}
-
-.result-table .header-row ion-col {
-  border-top: 1px solid black;
 }

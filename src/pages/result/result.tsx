@@ -5,6 +5,7 @@ import state from '../../store';
 @Component({
   tag: 'app-result',
   styleUrl: 'result.css',
+  scoped: true,
 })
 export class ResultPage {
   render() {
@@ -22,8 +23,8 @@ export class ResultPage {
           <ion-button href="/">Retake</ion-button>
         </div>
 
-        <ion-grid class="result-table">
-          <ion-row class="header-row">
+        <ion-grid class="table">
+          <ion-row class="table-header">
             <ion-col size="4">Plate</ion-col>
             <ion-col size="4">Your Answer</ion-col>
             <ion-col size="4">Correct</ion-col>
