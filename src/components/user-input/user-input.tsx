@@ -19,20 +19,15 @@ export class UserInput {
   @Prop() plate: Plate;
   @Prop() answer: HTMLIonInputElement;
 
-  componentDidLoad() {
-    console.log(this.el.querySelector('ion-slides'))
-  }
-
   handleFormSubmit() {
     this.plate.answer = this.answer.value;
     state.plates = updateStateWithUserInput(state.plates, this.plate);
   }
 
-
   render() {
     return [
       <ion-grid>
-        <form >
+        <form>
           <ion-row class="input-container">
             <ion-label>Enter what you see</ion-label>
             <ion-col>
@@ -41,12 +36,10 @@ export class UserInput {
           </ion-row>
           <ion-row>
             <ion-col>
-              <ion-button  expand="block">
-                Previous
-              </ion-button>
+              <ion-button expand="block">Previous</ion-button>
             </ion-col>
             <ion-col>
-              <ion-button  onClick={this.handleFormSubmit.bind(this)} expand="block">
+              <ion-button onClick={this.handleFormSubmit.bind(this)} expand="block">
                 Next
               </ion-button>
             </ion-col>
