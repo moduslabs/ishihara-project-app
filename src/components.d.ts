@@ -5,8 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { Plate } from "./pages/slider/page-five";
-import { Plate as Plate1 } from "./components/user-input/user-input";
+import { Plate } from "./components/user-input/user-input";
 export namespace Components {
     interface AppHome {
     }
@@ -17,8 +16,6 @@ export namespace Components {
     interface PageOne {
     }
     interface SlidesPhoto {
-        "plate": Plate;
-        "value": string;
     }
     interface UserInput {
         "answer": HTMLIonInputElement;
@@ -81,8 +78,6 @@ declare namespace LocalJSX {
     interface PageOne {
     }
     interface SlidesPhoto {
-        "plate"?: Plate;
-        "value"?: string;
     }
     interface UserInput {
         "answer"?: HTMLIonInputElement;

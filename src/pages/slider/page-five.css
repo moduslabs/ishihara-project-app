@@ -1,3 +1,11 @@
+.image-container span {
+  font-size: 16px;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
 .swiper-container .swiper-slide {
   display: grid;
 }
@@ -7,6 +15,7 @@
 }
 
 .swiper-slide img {
-    margin: 50px 0;
-    width: 350px !important;
+  height: 320px !important;
+  width: 320px !important;
+  margin-bottom: 10px;
 }
