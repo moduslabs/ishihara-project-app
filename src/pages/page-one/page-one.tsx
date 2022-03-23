@@ -1,4 +1,5 @@
 import { Component, h, State } from '@stencil/core';
+import routes from '../../helpers/routes';
 import state from '../../store';
 
 @Component({
@@ -6,14 +7,14 @@ import state from '../../store';
   styleUrl: 'page-one.css',
 })
 export class PageOne {
-   @State() plateData = state.plates[0];
+  @State() plateData = state.plates[0];
 
   render() {
     return [
       <ion-header>
         <ion-toolbar color="primary">
           <ion-buttons slot="start">
-            <ion-back-button defaultHref="/" />
+            <ion-back-button defaultHref={routes.home.url} />
           </ion-buttons>
           <ion-title>Color Deficiency Test</ion-title>
         </ion-toolbar>

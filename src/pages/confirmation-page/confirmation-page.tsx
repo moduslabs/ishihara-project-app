@@ -1,4 +1,5 @@
 import { Component, h, State } from '@stencil/core';
+import routes from '../../helpers/routes';
 import state from '../../store';
 
 @Component({
@@ -6,14 +7,14 @@ import state from '../../store';
   styleUrl: 'confirmation-page.css',
 })
 export class ConfirmationPage {
-  @State() score = state.plates.filter((plate) => plate.key === plate.answer)
+  @State() score = state.plates.filter(plate => plate.key === plate.answer);
 
   render() {
     return [
       <ion-header>
         <ion-toolbar color="primary">
           <ion-buttons slot="start">
-            <ion-back-button defaultHref="/confirmation/page" />
+            <ion-back-button defaultHref={routes.confirmation.url} />
           </ion-buttons>
           <ion-title>Color Deficiency Test Report</ion-title>
         </ion-toolbar>
@@ -24,7 +25,9 @@ export class ConfirmationPage {
           <img src="/assets/images/cover-isihara.png" alt="Ishihara" />
           <div class="report">
             <div class="circle">
-              <span class="score">{this.score.length}/{state.plates.length}</span>
+              <span class="score">
+                {this.score.length}/{state.plates.length}
+              </span>
             </div>
           </div>
         </div>

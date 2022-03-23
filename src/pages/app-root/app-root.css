@@ -1,1 +1,12 @@
+.image-container {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  margin: 40px 0;
+}
 
+p {
+  margin-bottom: 20px;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+}

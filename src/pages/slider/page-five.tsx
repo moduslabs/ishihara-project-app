@@ -1,8 +1,7 @@
-import { Component, Element, h, Prop, State } from '@stencil/core';
-import { updateStateWithUserInput } from '../../helpers/utils';
+import { Component, Element, h, State } from '@stencil/core';
 import state from '../../store';
-
-const nav = document.querySelector('ion-nav');
+import { capitalizePlateAnswer } from '../../helpers/utils';
+import routes from '../../helpers/routes';
 
 export type Plate = {
   key: string;
@@ -16,42 +15,34 @@ export type Plate = {
 })
 export class SlidesExample {
   @Element() el: HTMLElement;
-  @State() plateData = state.plates[1];
-  @State() values = {};
-  @State() currentIndex: number = 0;
-  @State() isLastSlide: boolean = false;
-  @Prop() plate: Plate;
-  @Prop({ mutable: true }) value: string;
-
+  @State() slides: HTMLIonSlidesElement;
+  @State() plates: Plate[] = state.plates;
+  private router: HTMLIonRouterElement = document.querySelector('ion-router');
   private slideOpts = {
     initialSlide: 0,
     speed: 400,
   };
 
-  setLastSlide() {
-    this.isLastSlide = true;
+  componentDidLoad() {
+    this.slides = this.el.querySelector('ion-slides');
   }
 
-  handleChange(ev, i) {
-    this.currentIndex = i;
-    this.value = ev.target ? ev.target.value : null;
-    this.values[i] = this.value ? this.value.toUpperCase() : null;
+  handleChange(e, plate: Plate) {
+    plate.answer = e.target?.value || null;
   }
 
-  next() {
-    const slider = this.el.querySelector('ion-slides');
-    const plate: Plate = state.plates[this.currentIndex];
-    plate.answer = this.values[this.currentIndex];
-    state.plates = updateStateWithUserInput(state.plates, plate);
-    slider.slideNext();
-
-    if (this.isLastSlide) {
-      nav.push('confirmation-page');
+  async next() {
+    state.plates = capitalizePlateAnswer(this.plates);
+    const isLastSlide = await this.slides.isEnd();
+    if (isLastSlide) {
+      this.router.push(routes.confirmation.url);
+    } else {
+      this.slides.slideNext();
     }
   }
 
   prev() {
-    this.el.querySelector('ion-slides').slidePrev();
+    this.slides.slidePrev();
   }
 
   render() {
@@ -59,26 +50,30 @@ export class SlidesExample {
       <ion-header>
         <ion-toolbar color="primary">
           <ion-buttons slot="start">
-            <ion-back-button defaultHref="/" />
+            <ion-back-button defaultHref={routes.home.url} />
           </ion-buttons>
           <ion-title>Color Deficiency Test</ion-title>
         </ion-toolbar>
       </ion-header>,
       <ion-content>
-        <ion-slides options={this.slideOpts} onIonSlideReachEnd={this.setLastSlide.bind(this)}>
-          {state.plates.map((plate, i) => (
+        <ion-slides options={this.slideOpts}>
+          {this.plates?.map((plate, index) => (
             <ion-slide>
-              <img class="image-container" src={plate.url} alt="plate two" />
-
+              <div class="image-container">
+                <img src={plate.url} alt="plate two" />
+                <span>
+                  {index + 1}/{this.plates.length}
+                </span>
+              </div>
               <ion-row class="input-container">
                 <ion-label>Enter what you see</ion-label>
                 <ion-col>
-                  <ion-input value={this.values[i]} onInput={ev => this.handleChange(ev, i)}></ion-input>
+                  <ion-input class="uppercase" autofocus value={plate.answer} onInput={e => this.handleChange(e, plate)}></ion-input>
                 </ion-col>
               </ion-row>
               <ion-row>
                 <ion-col>
-                  <ion-button onClick={this.prev.bind(this)} expand="block">
+                  <ion-button disabled={index === 0} onClick={this.prev.bind(this)} expand="block">
                     Previous
                   </ion-button>
                 </ion-col>

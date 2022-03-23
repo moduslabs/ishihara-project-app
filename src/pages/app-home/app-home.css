@@ -1,31 +1,9 @@
-.image-container {
-  display: grid;
-  justify-content: center;
-  align-items: center;
-  margin: 50px 0;
-}
 .cover-image {
-    margin: 30px 0;
+  margin: 30px 0;
 }
 
 .caption {
   font-family: 'Montserrat', sans-serif;
   text-align: center;
   font-size: 20px;
-}
-
-p {
-  margin-bottom: 20px;
-  text-align: center;
-  font-family: 'Montserrat', sans-serif;
-}
-
-.landing-page {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.landing-image {
-  width: 100%;
 }

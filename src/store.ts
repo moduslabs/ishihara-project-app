@@ -1,8 +1,7 @@
-import { createStore } from "@stencil/store";
-
+import { createStore } from '@stencil/store';
 
 const { state, onChange } = createStore({
-  plates: []
+  plates: [],
 });
 
 onChange('plates', value => {
