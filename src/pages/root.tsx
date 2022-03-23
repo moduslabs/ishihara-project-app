@@ -1,10 +1,10 @@
 import { Component, h, State } from '@stencil/core';
-import routes from '../../helpers/routes';
-import { loadPlates } from '../../helpers/utils';
+import routes from '../helpers/routes';
+import { loadPlates } from '../helpers/utils';
 
 @Component({
   tag: 'app-root',
-  styleUrl: 'app-root.css',
+  styleUrl: 'root.css',
 })
 export class AppRoot {
   @State() count: number = 0;
@@ -25,14 +25,14 @@ export class AppRoot {
 
   render() {
     return (
-      <ish-layout hasBack={this.hasBack}>
+      <app-layout hasBack={this.hasBack}>
         <ion-router useHash={false} onIonRouteWillChange={e => this.handlePageEnter(e)}>
           {Object.values(routes).map(({ url, component }) => (
             <ion-route url={url} component={component} />
           ))}
         </ion-router>
         <ion-nav />
-      </ish-layout>
+      </app-layout>
     );
   }
 }

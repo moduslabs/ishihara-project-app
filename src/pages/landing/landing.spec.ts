@@ -1,11 +1,11 @@
-import { AppHome } from './app-home';
+import { LandingPage } from './landing';
 import { newSpecPage } from '@stencil/core/testing';
 
-describe('app-home', () => {
+describe('app-landing', () => {
   it('renders', async () => {
     const { root } = await newSpecPage({
-      components: [AppHome],
-      html: '<app-home></app-home>',
+      components: [LandingPage],
+      html: '<app-landing></app-landing>',
     });
     expect(root.querySelector('ion-title').textContent).toEqual('Home');
   });

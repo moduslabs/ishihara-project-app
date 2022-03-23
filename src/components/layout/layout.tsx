@@ -8,7 +8,7 @@ export type Plate = {
 };
 
 @Component({
-  tag: 'ish-layout',
+  tag: 'app-layout',
   styleUrl: 'layout.css',
 })
 export class Layout {

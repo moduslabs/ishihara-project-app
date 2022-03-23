@@ -3,10 +3,10 @@ import cx from 'classnames';
 import state from '../../store';
 
 @Component({
-  tag: 'confirmation-page',
-  styleUrl: 'confirmation-page.css',
+  tag: 'app-result',
+  styleUrl: 'result.css',
 })
-export class ConfirmationPage {
+export class ResultPage {
   render() {
     const correctPlates = state.plates.filter(plate => plate.key === plate.answer);
 

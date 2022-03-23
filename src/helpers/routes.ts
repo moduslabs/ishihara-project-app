@@ -1,15 +1,15 @@
 const routes = {
   home: {
     url: '/',
-    component: 'app-home',
+    component: 'app-landing',
   },
   slides: {
     url: '/page/slides',
-    component: 'ish-slider',
+    component: 'app-slider',
   },
-  confirmation: {
-    url: '/page/confirmation',
-    component: 'confirmation-page',
+  result: {
+    url: '/page/result',
+    component: 'app-result',
   },
 };
 

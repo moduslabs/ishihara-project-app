@@ -10,7 +10,7 @@ export type Plate = {
 };
 
 @Component({
-  tag: 'ish-slider',
+  tag: 'app-slider',
   styleUrl: 'slider.css',
 })
 export class SliderPage {
@@ -35,7 +35,7 @@ export class SliderPage {
     state.plates = capitalizePlateAnswer(this.plates);
     const isLastSlide = await this.slides.isEnd();
     if (isLastSlide) {
-      this.router.push(routes.confirmation.url);
+      this.router.push(routes.result.url);
     } else {
       this.slides.slideNext();
     }
@@ -66,10 +66,10 @@ export class SliderPage {
               </ion-row>
               <ion-row>
                 <ion-col>
-                  <ish-button to={routes.slides.url} secondary value="Previous" disabled={index === 0} clickHandler={this.prev.bind(this)} />
+                  <app-button to={routes.slides.url} secondary value="Previous" disabled={index === 0} clickHandler={this.prev.bind(this)} />
                 </ion-col>
                 <ion-col>
-                  <ish-button to={routes.slides.url} value="Next" clickHandler={this.next.bind(this)} />
+                  <app-button to={routes.slides.url} value="Next" clickHandler={this.next.bind(this)} />
                 </ion-col>
               </ion-row>
             </ion-slide>

@@ -2,10 +2,10 @@ import { Component, h } from '@stencil/core';
 import routes from '../../helpers/routes';
 
 @Component({
-  tag: 'app-home',
-  styleUrl: 'app-home.css',
+  tag: 'app-landing',
+  styleUrl: 'landing.css',
 })
-export class AppHome {
+export class LandingPage {
   render() {
     return (
       <div>
@@ -15,7 +15,7 @@ export class AppHome {
         </div>
         <h3 class="caption">Optometry Color Deficiency Test App</h3>
         <p>The Ishihara test is a color perception test for color deficiencies, the first in a class of successful color vision tests called pseudo-isochromatic plates</p>
-        <ish-button value="Get Started" to={routes.slides.url} />
+        <app-button value="Get Started" to={routes.slides.url} />
       </div>
     );
   }

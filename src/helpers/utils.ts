@@ -1,4 +1,4 @@
-import { Plate } from '../components/user-input/user-input';
+import { Plate } from '../types/plate';
 import state from '../store';
 
 export const updateStateWithUserInput = (state: Plate[], updatedPlate: Plate) => {
