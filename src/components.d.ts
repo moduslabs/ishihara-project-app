@@ -13,9 +13,19 @@ export namespace Components {
     }
     interface ConfirmationPage {
     }
-    interface PageOne {
+    interface IshButton {
+        "clickHandler": (e: MouseEvent) => void;
+        "disabled"?: boolean;
+        "secondary"?: boolean;
+        "to"?: string;
+        "value": string | number;
     }
-    interface SlidesPhoto {
+    interface IshLayout {
+        "hasBack": boolean;
+    }
+    interface IshSlider {
+    }
+    interface PageOne {
     }
     interface UserInput {
         "answer": HTMLIonInputElement;
@@ -41,17 +51,29 @@ declare global {
         prototype: HTMLConfirmationPageElement;
         new (): HTMLConfirmationPageElement;
     };
+    interface HTMLIshButtonElement extends Components.IshButton, HTMLStencilElement {
+    }
+    var HTMLIshButtonElement: {
+        prototype: HTMLIshButtonElement;
+        new (): HTMLIshButtonElement;
+    };
+    interface HTMLIshLayoutElement extends Components.IshLayout, HTMLStencilElement {
+    }
+    var HTMLIshLayoutElement: {
+        prototype: HTMLIshLayoutElement;
+        new (): HTMLIshLayoutElement;
+    };
+    interface HTMLIshSliderElement extends Components.IshSlider, HTMLStencilElement {
+    }
+    var HTMLIshSliderElement: {
+        prototype: HTMLIshSliderElement;
+        new (): HTMLIshSliderElement;
+    };
     interface HTMLPageOneElement extends Components.PageOne, HTMLStencilElement {
     }
     var HTMLPageOneElement: {
         prototype: HTMLPageOneElement;
         new (): HTMLPageOneElement;
-    };
-    interface HTMLSlidesPhotoElement extends Components.SlidesPhoto, HTMLStencilElement {
-    }
-    var HTMLSlidesPhotoElement: {
-        prototype: HTMLSlidesPhotoElement;
-        new (): HTMLSlidesPhotoElement;
     };
     interface HTMLUserInputElement extends Components.UserInput, HTMLStencilElement {
     }
@@ -63,8 +85,10 @@ declare global {
         "app-home": HTMLAppHomeElement;
         "app-root": HTMLAppRootElement;
         "confirmation-page": HTMLConfirmationPageElement;
+        "ish-button": HTMLIshButtonElement;
+        "ish-layout": HTMLIshLayoutElement;
+        "ish-slider": HTMLIshSliderElement;
         "page-one": HTMLPageOneElement;
-        "slides-photo": HTMLSlidesPhotoElement;
         "user-input": HTMLUserInputElement;
     }
 }
@@ -75,9 +99,19 @@ declare namespace LocalJSX {
     }
     interface ConfirmationPage {
     }
-    interface PageOne {
+    interface IshButton {
+        "clickHandler"?: (e: MouseEvent) => void;
+        "disabled"?: boolean;
+        "secondary"?: boolean;
+        "to"?: string;
+        "value"?: string | number;
     }
-    interface SlidesPhoto {
+    interface IshLayout {
+        "hasBack"?: boolean;
+    }
+    interface IshSlider {
+    }
+    interface PageOne {
     }
     interface UserInput {
         "answer"?: HTMLIonInputElement;
@@ -87,8 +121,10 @@ declare namespace LocalJSX {
         "app-home": AppHome;
         "app-root": AppRoot;
         "confirmation-page": ConfirmationPage;
+        "ish-button": IshButton;
+        "ish-layout": IshLayout;
+        "ish-slider": IshSlider;
         "page-one": PageOne;
-        "slides-photo": SlidesPhoto;
         "user-input": UserInput;
     }
 }
@@ -99,8 +135,10 @@ declare module "@stencil/core" {
             "app-home": LocalJSX.AppHome & JSXBase.HTMLAttributes<HTMLAppHomeElement>;
             "app-root": LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;
             "confirmation-page": LocalJSX.ConfirmationPage & JSXBase.HTMLAttributes<HTMLConfirmationPageElement>;
+            "ish-button": LocalJSX.IshButton & JSXBase.HTMLAttributes<HTMLIshButtonElement>;
+            "ish-layout": LocalJSX.IshLayout & JSXBase.HTMLAttributes<HTMLIshLayoutElement>;
+            "ish-slider": LocalJSX.IshSlider & JSXBase.HTMLAttributes<HTMLIshSliderElement>;
             "page-one": LocalJSX.PageOne & JSXBase.HTMLAttributes<HTMLPageOneElement>;
-            "slides-photo": LocalJSX.SlidesPhoto & JSXBase.HTMLAttributes<HTMLSlidesPhotoElement>;
             "user-input": LocalJSX.UserInput & JSXBase.HTMLAttributes<HTMLUserInputElement>;
         }
     }

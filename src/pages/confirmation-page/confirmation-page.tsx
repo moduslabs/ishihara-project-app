@@ -1,4 +1,4 @@
-import { Component, h, State } from '@stencil/core';
+import { Component, h } from '@stencil/core';
 import cx from 'classnames';
 import state from '../../store';
 
@@ -7,22 +7,17 @@ import state from '../../store';
   styleUrl: 'confirmation-page.css',
 })
 export class ConfirmationPage {
-  @State() correctPlates = state.plates.filter(plate => plate.key === plate.answer);
-
   render() {
-    const scorePercentage = ((this.correctPlates.length / state.plates.length) * 100).toFixed(0);
-    return [
-      <ion-header>
-        <ion-toolbar color="primary">
-          <ion-title>Color Deficiency Test Report</ion-title>
-        </ion-toolbar>
-      </ion-header>,
+    const correctPlates = state.plates.filter(plate => plate.key === plate.answer);
 
-      <ion-content class="ion-padding">
+    const scorePercentage = ((correctPlates.length / state.plates.length) * 100).toFixed(0);
+    return (
+      <div class="ion-padding">
+        <h2>Color Deficiency Test Report</h2>
         <div class="result">
           <h2>Test result</h2>
           <p>
-            {this.correctPlates.length}/{state.plates.length} ({scorePercentage}%)
+            {correctPlates.length}/{state.plates.length} ({scorePercentage}%)
           </p>
           <ion-button href="/">Retake</ion-button>
         </div>
@@ -52,7 +47,7 @@ export class ConfirmationPage {
             );
           })}
         </ion-grid>
-      </ion-content>,
-    ];
+      </div>
+    );
   }
 }

@@ -5,7 +5,7 @@ const routes = {
   },
   slides: {
     url: '/page/slides',
-    component: 'slides-photo',
+    component: 'ish-slider',
   },
   confirmation: {
     url: '/page/confirmation',
