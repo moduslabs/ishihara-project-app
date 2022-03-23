@@ -16,17 +16,16 @@ export class ResultPage {
       <div class="ion-padding">
         <h2>Color Deficiency Test Report</h2>
         <div class="result">
-          <h2>Test result</h2>
+          <h3>Test result</h3>
           <p>
             {correctPlates.length}/{state.plates.length} ({scorePercentage}%)
           </p>
-          <ion-button href="/">Retake</ion-button>
         </div>
 
         <ion-grid class="table">
           <ion-row class="table-header">
             <ion-col size="4">Plate</ion-col>
-            <ion-col size="4">Your Answer</ion-col>
+            <ion-col size="4">Your answer</ion-col>
             <ion-col size="4">Correct</ion-col>
           </ion-row>
           {state.plates?.map(({ answer, key }, index) => {
@@ -35,7 +34,7 @@ export class ResultPage {
                 <ion-col size="4">{index + 1}</ion-col>
                 <ion-col
                   size="4"
-                  class={cx({
+                  class={cx('white', {
                     'no-answer': !answer,
                     'flawed': key !== answer,
                     'flawless': key === answer,
@@ -43,11 +42,17 @@ export class ResultPage {
                 >
                   {answer || '(no answer)'}
                 </ion-col>
-                <ion-col size="4">{key}</ion-col>
+                <ion-col size="4" class="bold">
+                  {key}
+                </ion-col>
               </ion-row>
             );
           })}
         </ion-grid>
+        <p class="caption">These are sample results and do not constitute medical advice</p>
+        <div class="center">
+          <app-button to="/" value="Retake" />
+        </div>
       </div>
     );
   }

@@ -8,6 +8,7 @@ import { Component, Prop, h } from '@stencil/core';
 export class Button {
   @Prop() to?: string;
   @Prop() value: string | number;
+  @Prop() expand?: 'block' | 'full';
   @Prop() disabled?: boolean;
   @Prop() secondary?: boolean = false;
   @Prop() clickHandler: (e: MouseEvent) => void;
@@ -15,7 +16,7 @@ export class Button {
 
   render() {
     return (
-      <ion-button shape="round" expand="block" disabled={this.disabled} href={this.to} onClick={this.clickHandler} {...this.props}>
+      <ion-button shape="round" expand={this.expand} disabled={this.disabled} href={this.to} onClick={this.clickHandler} {...this.props}>
         {this.value}
       </ion-button>
     );

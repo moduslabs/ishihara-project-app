@@ -48,7 +48,7 @@ export class SliderPage {
 
   render() {
     return (
-      <div>
+      <div class="ion-padding">
         <h2>Color Deficiency Test</h2>
         <ion-slides options={this.slideOpts}>
           {this.plates?.map((plate, index) => (
@@ -67,10 +67,10 @@ export class SliderPage {
               </ion-row>
               <ion-row>
                 <ion-col>
-                  <app-button to={routes.slides.url} secondary value="Previous" disabled={index === 0} clickHandler={this.prev.bind(this)} />
+                  <app-button to={routes.slides.url} secondary value="Previous" disabled={index === 0} clickHandler={this.prev.bind(this)} expand="block" />
                 </ion-col>
                 <ion-col>
-                  <app-button to={routes.slides.url} value="Next" clickHandler={this.next.bind(this)} />
+                  <app-button to={routes.slides.url} value="Next" clickHandler={this.next.bind(this)} expand="block" />
                 </ion-col>
               </ion-row>
             </ion-slide>

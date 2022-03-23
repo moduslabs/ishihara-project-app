@@ -9,6 +9,7 @@ export namespace Components {
     interface AppButton {
         "clickHandler": (e: MouseEvent) => void;
         "disabled"?: boolean;
+        "expand"?: 'block' | 'full';
         "secondary"?: boolean;
         "to"?: string;
         "value": string | number;
@@ -75,6 +76,7 @@ declare namespace LocalJSX {
     interface AppButton {
         "clickHandler"?: (e: MouseEvent) => void;
         "disabled"?: boolean;
+        "expand"?: 'block' | 'full';
         "secondary"?: boolean;
         "to"?: string;
         "value"?: string | number;
