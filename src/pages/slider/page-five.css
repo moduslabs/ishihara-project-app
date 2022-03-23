@@ -15,6 +15,7 @@
 }
 
 .swiper-slide img {
+  height: 320px !important;
   width: 320px !important;
   margin-bottom: 10px;
 }
