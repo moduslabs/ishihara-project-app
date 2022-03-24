@@ -1,28 +1,32 @@
 .result {
   text-align: center;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
 }
 
-.result h2 {
+.result h3 {
   margin-top: 32px;
   line-height: 1;
   font-weight: 400;
+  font-family: 'Proxima Nova';
 }
 
 .result p {
   font-size: 50px;
+  margin: 8px 0;
+  font-weight: 500;
+  font-family: 'Proxima Nova';
+}
+
+.table {
   margin: 16px 0;
-  font-weight: 400;
 }
 
 .table ion-col {
-  padding: 16px 8px;
-  border-bottom: 1px solid black;
-  border-right: 1px solid black;
-}
-
-.table ion-col:first-child {
-  border-left: 1px solid black;
+  padding: 12px 8px;
+  background-color: var(--ion-color-lightgrey);
+  border: 1px solid var(--ion-color-white);
+  text-align: center;
+  font-family: 'Proxima Nova';
 }
 
 .table-header {
@@ -30,17 +34,36 @@
 }
 
 .table .table-header ion-col {
-  border-top: 1px solid black;
+  background-color: var(--ion-color-white);
+  border-top: 1px solid var(--ion-color-white);
 }
 
-.flawless {
-  color: green;
+.table ion-col.flawless {
+  background-color: var(--ion-color-green);
 }
 
-.flawed {
-  color: red;
+.table ion-col.flawed {
+  background-color: var(--ion-color-red);
 }
 
-.no-answer {
-  color: grey;
+.table ion-col.no-answer {
+  background-color: var(--ion-color-orange);
+}
+
+.table ion-col.bold {
+  font-weight: 600;
+}
+
+.table ion-col.white {
+  color: var(--ion-color-white);
+}
+
+.caption {
+  font-size: 16px;
+  max-width: 230px;
+  margin: 0 auto 32px auto;
+}
+
+.center {
+  text-align: center;
 }
