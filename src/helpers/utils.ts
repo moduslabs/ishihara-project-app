@@ -1,4 +1,4 @@
-import { Plate } from '../components/user-input/user-input';
+import { Plate } from '../types/plate';
 import state from '../store';
 
 export const updateStateWithUserInput = (state: Plate[], updatedPlate: Plate) => {
@@ -19,7 +19,6 @@ const prefetchPlateImages = (plates: Plate[]) => {
 };
 
 export async function loadPlates() {
-  state.plates = [];
   const response = await fetch('https://b9jdjjz440.execute-api.us-east-1.amazonaws.com/test/plates?limit=8');
   const plates = await response.json();
   state.plates = plates ? plates?.map(plate => ({ ...plate, answer: null })) : null;

@@ -5,29 +5,50 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { Plate } from "./components/user-input/user-input";
 export namespace Components {
-    interface AppHome {
+    interface AppButton {
+        "clickHandler": (e: MouseEvent) => void;
+        "disabled"?: boolean;
+        "secondary"?: boolean;
+        "to"?: string;
+        "value": string | number;
+    }
+    interface AppLanding {
+    }
+    interface AppLayout {
+        "hasBack": boolean;
+    }
+    interface AppResult {
     }
     interface AppRoot {
     }
-    interface ConfirmationPage {
-    }
-    interface PageOne {
-    }
-    interface SlidesPhoto {
-    }
-    interface UserInput {
-        "answer": HTMLIonInputElement;
-        "plate": Plate;
+    interface AppSlider {
     }
 }
 declare global {
-    interface HTMLAppHomeElement extends Components.AppHome, HTMLStencilElement {
+    interface HTMLAppButtonElement extends Components.AppButton, HTMLStencilElement {
     }
-    var HTMLAppHomeElement: {
-        prototype: HTMLAppHomeElement;
-        new (): HTMLAppHomeElement;
+    var HTMLAppButtonElement: {
+        prototype: HTMLAppButtonElement;
+        new (): HTMLAppButtonElement;
+    };
+    interface HTMLAppLandingElement extends Components.AppLanding, HTMLStencilElement {
+    }
+    var HTMLAppLandingElement: {
+        prototype: HTMLAppLandingElement;
+        new (): HTMLAppLandingElement;
+    };
+    interface HTMLAppLayoutElement extends Components.AppLayout, HTMLStencilElement {
+    }
+    var HTMLAppLayoutElement: {
+        prototype: HTMLAppLayoutElement;
+        new (): HTMLAppLayoutElement;
+    };
+    interface HTMLAppResultElement extends Components.AppResult, HTMLStencilElement {
+    }
+    var HTMLAppResultElement: {
+        prototype: HTMLAppResultElement;
+        new (): HTMLAppResultElement;
     };
     interface HTMLAppRootElement extends Components.AppRoot, HTMLStencilElement {
     }
@@ -35,73 +56,59 @@ declare global {
         prototype: HTMLAppRootElement;
         new (): HTMLAppRootElement;
     };
-    interface HTMLConfirmationPageElement extends Components.ConfirmationPage, HTMLStencilElement {
+    interface HTMLAppSliderElement extends Components.AppSlider, HTMLStencilElement {
     }
-    var HTMLConfirmationPageElement: {
-        prototype: HTMLConfirmationPageElement;
-        new (): HTMLConfirmationPageElement;
-    };
-    interface HTMLPageOneElement extends Components.PageOne, HTMLStencilElement {
-    }
-    var HTMLPageOneElement: {
-        prototype: HTMLPageOneElement;
-        new (): HTMLPageOneElement;
-    };
-    interface HTMLSlidesPhotoElement extends Components.SlidesPhoto, HTMLStencilElement {
-    }
-    var HTMLSlidesPhotoElement: {
-        prototype: HTMLSlidesPhotoElement;
-        new (): HTMLSlidesPhotoElement;
-    };
-    interface HTMLUserInputElement extends Components.UserInput, HTMLStencilElement {
-    }
-    var HTMLUserInputElement: {
-        prototype: HTMLUserInputElement;
-        new (): HTMLUserInputElement;
+    var HTMLAppSliderElement: {
+        prototype: HTMLAppSliderElement;
+        new (): HTMLAppSliderElement;
     };
     interface HTMLElementTagNameMap {
-        "app-home": HTMLAppHomeElement;
+        "app-button": HTMLAppButtonElement;
+        "app-landing": HTMLAppLandingElement;
+        "app-layout": HTMLAppLayoutElement;
+        "app-result": HTMLAppResultElement;
         "app-root": HTMLAppRootElement;
-        "confirmation-page": HTMLConfirmationPageElement;
-        "page-one": HTMLPageOneElement;
-        "slides-photo": HTMLSlidesPhotoElement;
-        "user-input": HTMLUserInputElement;
+        "app-slider": HTMLAppSliderElement;
     }
 }
 declare namespace LocalJSX {
-    interface AppHome {
+    interface AppButton {
+        "clickHandler"?: (e: MouseEvent) => void;
+        "disabled"?: boolean;
+        "secondary"?: boolean;
+        "to"?: string;
+        "value"?: string | number;
+    }
+    interface AppLanding {
+    }
+    interface AppLayout {
+        "hasBack"?: boolean;
+    }
+    interface AppResult {
     }
     interface AppRoot {
     }
-    interface ConfirmationPage {
-    }
-    interface PageOne {
-    }
-    interface SlidesPhoto {
-    }
-    interface UserInput {
-        "answer"?: HTMLIonInputElement;
-        "plate"?: Plate;
+    interface AppSlider {
     }
     interface IntrinsicElements {
-        "app-home": AppHome;
+        "app-button": AppButton;
+        "app-landing": AppLanding;
+        "app-layout": AppLayout;
+        "app-result": AppResult;
         "app-root": AppRoot;
-        "confirmation-page": ConfirmationPage;
-        "page-one": PageOne;
-        "slides-photo": SlidesPhoto;
-        "user-input": UserInput;
+        "app-slider": AppSlider;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "app-home": LocalJSX.AppHome & JSXBase.HTMLAttributes<HTMLAppHomeElement>;
+            "app-button": LocalJSX.AppButton & JSXBase.HTMLAttributes<HTMLAppButtonElement>;
+            "app-landing": LocalJSX.AppLanding & JSXBase.HTMLAttributes<HTMLAppLandingElement>;
+            "app-layout": LocalJSX.AppLayout & JSXBase.HTMLAttributes<HTMLAppLayoutElement>;
+            "app-result": LocalJSX.AppResult & JSXBase.HTMLAttributes<HTMLAppResultElement>;
             "app-root": LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;
-            "confirmation-page": LocalJSX.ConfirmationPage & JSXBase.HTMLAttributes<HTMLConfirmationPageElement>;
-            "page-one": LocalJSX.PageOne & JSXBase.HTMLAttributes<HTMLPageOneElement>;
-            "slides-photo": LocalJSX.SlidesPhoto & JSXBase.HTMLAttributes<HTMLSlidesPhotoElement>;
-            "user-input": LocalJSX.UserInput & JSXBase.HTMLAttributes<HTMLUserInputElement>;
+            "app-slider": LocalJSX.AppSlider & JSXBase.HTMLAttributes<HTMLAppSliderElement>;
         }
     }
 }

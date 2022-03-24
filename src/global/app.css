@@ -34,22 +34,40 @@
 
 @import '../theme/variables.css';
 
-body {
+* {
   font-family: 'Montserrat', sans-serif;
 }
 
-.sc-ion-input-md-h, .sc-ion-input-ios-h  { 
+.sc-ion-input-md-h,
+.sc-ion-input-ios-h {
   background: #ededed;
   border-radius: 3px;
   margin-bottom: 20px;
   text-align: center;
 }
 
-
-.sc-ion-label-md-h, .sc-ion-label-ios-h  {
+.sc-ion-label-md-h,
+.sc-ion-label-ios-h {
   font-size: 14px;
 }
 
 button:active {
   color: var(--ion-color-primary);
+}
+
+.ion-page {
+  overflow-y: auto !important;
+  background-color: var(--ion-color-white);
+}
+
+h2 {
+  text-align: center;
+  margin-top: 32px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+p {
+  margin-bottom: 20px;
+  text-align: center;
 }

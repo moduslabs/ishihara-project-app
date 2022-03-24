@@ -1,34 +1,30 @@
-import { Component, h, State } from '@stencil/core';
+import { Component, h } from '@stencil/core';
 import cx from 'classnames';
 import state from '../../store';
 
 @Component({
-  tag: 'confirmation-page',
-  styleUrl: 'confirmation-page.css',
+  tag: 'app-result',
+  styleUrl: 'result.css',
+  scoped: true,
 })
-export class ConfirmationPage {
-  @State() correctPlates = state.plates.filter(plate => plate.key === plate.answer);
-
+export class ResultPage {
   render() {
-    const scorePercentage = ((this.correctPlates.length / state.plates.length) * 100).toFixed(0);
-    return [
-      <ion-header>
-        <ion-toolbar color="primary">
-          <ion-title>Color Deficiency Test Report</ion-title>
-        </ion-toolbar>
-      </ion-header>,
+    const correctPlates = state.plates.filter(plate => plate.key === plate.answer);
 
-      <ion-content class="ion-padding">
+    const scorePercentage = ((correctPlates.length / state.plates.length) * 100).toFixed(0);
+    return (
+      <div class="ion-padding">
+        <h2>Color Deficiency Test Report</h2>
         <div class="result">
           <h2>Test result</h2>
           <p>
-            {this.correctPlates.length}/{state.plates.length} ({scorePercentage}%)
+            {correctPlates.length}/{state.plates.length} ({scorePercentage}%)
           </p>
           <ion-button href="/">Retake</ion-button>
         </div>
 
-        <ion-grid class="result-table">
-          <ion-row class="header-row">
+        <ion-grid class="table">
+          <ion-row class="table-header">
             <ion-col size="4">Plate</ion-col>
             <ion-col size="4">Your Answer</ion-col>
             <ion-col size="4">Correct</ion-col>
@@ -52,7 +48,7 @@ export class ConfirmationPage {
             );
           })}
         </ion-grid>
-      </ion-content>,
-    ];
+      </div>
+    );
   }
 }

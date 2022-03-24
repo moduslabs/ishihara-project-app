@@ -1,0 +1,27 @@
+ion-header ion-title {
+  font-weight: 900;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  line-height: 0;
+  width: 220px;
+}
+
+ion-header ion-title img {
+  margin: auto;
+}
+
+ion-footer {
+  padding: 16px 0;
+  text-align: center;
+  height: 64px;
+}
+
+ion-footer::before {
+  display: none !important;
+}
+
+ion-footer img {
+  width: 220px;
+}
