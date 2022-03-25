@@ -15,7 +15,7 @@ export const capitalizePlateAnswer = (plates: Plate[]) => {
 };
 
 const prefetchPlateImages = (plates: Plate[]) => {
-  if (plates) Promise.all(plates.map(p => fetch(p.url)));
+  if (plates) plates.map(p => fetch(p.url));
 };
 
 export async function loadPlates() {

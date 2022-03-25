@@ -5,10 +5,10 @@ ion-header ion-title {
   left: 50%;
   transform: translate(-50%, -50%);
   line-height: 0;
-  width: 220px;
 }
 
 ion-header ion-title img {
+  width: 160px;
   margin: auto;
 }
 

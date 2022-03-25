@@ -4,6 +4,7 @@ import routes from '../../helpers/routes';
 @Component({
   tag: 'app-landing',
   styleUrl: 'landing.css',
+  scoped: true,
 })
 export class LandingPage {
   render() {
@@ -13,7 +14,7 @@ export class LandingPage {
         <div class="container">
           <img src="/assets/images/cover-isihara.png" alt="Ishihara" />
         </div>
-        <h3 class="caption">Optometry Color Deficiency Test App</h3>
+        <h3>Optometry Color Deficiency Test App</h3>
         <p>The Ishihara test is a color perception test for color deficiencies, the first in a class of successful color vision tests called pseudo-isochromatic plates</p>
         <app-button to={routes.slides.url} value="Get Started" expand="block" />
       </div>

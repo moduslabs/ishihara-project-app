@@ -34,6 +34,30 @@
 
 @import '../theme/variables.css';
 
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url('../assets/fonts/ProximaNova-Reg.otf') format('opentype');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url('../assets/fonts/ProximaNova-Bold.otf') format('opentype');
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url('../assets/fonts/Proxima\ Nova\ Light.otf') format('opentype');
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url('../assets/fonts/Proxima\ Nova\ Semibold.otf') format('opentype');
+  font-weight: 500;
+}
+
 * {
   font-family: 'Montserrat', sans-serif;
 }
