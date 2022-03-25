@@ -17,12 +17,10 @@ export type Plate = {
 export class SliderPage {
   @Element() el: HTMLElement;
   @State() slides: HTMLIonSlidesElement;
+  @State() slideIndex: number = 0;
   @State() plates: Plate[] = state.plates;
   private router: HTMLIonRouterElement = document.querySelector('ion-router');
-  private slideOpts = {
-    initialSlide: 0,
-    speed: 400,
-  };
+  private slideOpts = { initialSlide: 0, speed: 400 };
 
   componentDidLoad() {
     this.slides = this.el.querySelector('ion-slides');
@@ -40,15 +38,17 @@ export class SliderPage {
     } else {
       this.slides.slideNext();
     }
+    if (this.slideIndex < this.plates?.length - 1) this.slideIndex++;
   }
 
   prev() {
     this.slides.slidePrev();
+    if (this.slideIndex > 0) this.slideIndex--;
   }
 
   render() {
     return (
-      <div class="ion-padding">
+      <div>
         <h2>Color Deficiency Test</h2>
         <ion-slides options={this.slideOpts}>
           {this.plates?.map((plate, index) => (
@@ -62,20 +62,20 @@ export class SliderPage {
               <ion-row class="input-container">
                 <ion-label>Enter what you see</ion-label>
                 <ion-col>
-                  <ion-input class="uppercase" autofocus value={plate.answer} onInput={e => this.handleChange(e, plate)}></ion-input>
-                </ion-col>
-              </ion-row>
-              <ion-row>
-                <ion-col>
-                  <app-button to={routes.slides.url} secondary value="Previous" disabled={index === 0} clickHandler={this.prev.bind(this)} expand="block" />
-                </ion-col>
-                <ion-col>
-                  <app-button to={routes.slides.url} value="Next" clickHandler={this.next.bind(this)} expand="block" />
+                  <ion-input class="uppercase" value={plate.answer} onInput={e => this.handleChange(e, plate)}></ion-input>
                 </ion-col>
               </ion-row>
             </ion-slide>
           ))}
         </ion-slides>
+        <ion-row class="ion-padding">
+          <ion-col>
+            <app-button secondary value="Previous" disabled={this.slideIndex === 0} clickHandler={this.prev.bind(this)} expand="block" />
+          </ion-col>
+          <ion-col>
+            <app-button value={this.slideIndex === this.plates.length - 1 ? 'Finish' : 'Next'} clickHandler={this.next.bind(this)} expand="block" />
+          </ion-col>
+        </ion-row>
       </div>
     );
   }
