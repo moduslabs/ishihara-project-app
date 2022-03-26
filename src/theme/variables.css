@@ -1,3 +1,10 @@
 :root {
-    --ion-color-primary: #2b6f3e;
+  --ion-color-black: #000000;
+  --ion-color-white: #ffffff;
+  --ion-color-red: #e44469;
+  --ion-color-green: #1fd183;
+  --ion-color-orange: #fbb446;
+  --ion-color-lightgrey: #efefef;
+  --ion-color-primary: #1a1a1a;
+  --ion-color-secondary: var(--ion-color-white);
 }

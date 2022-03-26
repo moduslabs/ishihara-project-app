@@ -2,18 +2,14 @@ import { Component, Element, h, State } from '@stencil/core';
 import state from '../../store';
 import { capitalizePlateAnswer } from '../../helpers/utils';
 import routes from '../../helpers/routes';
-
-export type Plate = {
-  key: string;
-  url: string;
-  answer?: null | string | number;
-};
+import { Plate } from '../../types/plate';
 
 @Component({
-  tag: 'slides-photo',
-  styleUrl: 'page-five.css',
+  tag: 'app-slider',
+  styleUrl: 'slider.css',
+  scoped: true,
 })
-export class SlidesExample {
+export class SliderPage {
   @Element() el: HTMLElement;
   @State() slides: HTMLIonSlidesElement;
   @State() plates: Plate[] = state.plates;
@@ -35,7 +31,7 @@ export class SlidesExample {
     state.plates = capitalizePlateAnswer(this.plates);
     const isLastSlide = await this.slides.isEnd();
     if (isLastSlide) {
-      this.router.push(routes.confirmation.url);
+      this.router.push(routes.result.url);
     } else {
       this.slides.slideNext();
     }
@@ -46,21 +42,14 @@ export class SlidesExample {
   }
 
   render() {
-    return [
-      <ion-header>
-        <ion-toolbar color="primary">
-          <ion-buttons slot="start">
-            <ion-back-button defaultHref={routes.home.url} />
-          </ion-buttons>
-          <ion-title>Color Deficiency Test</ion-title>
-        </ion-toolbar>
-      </ion-header>,
-      <ion-content>
+    return (
+      <div class="ion-padding">
+        <h2>Color Deficiency Test</h2>
         <ion-slides options={this.slideOpts}>
           {this.plates?.map((plate, index) => (
             <ion-slide>
-              <div class="image-container">
-                <img src={plate.url} alt="plate two" />
+              <div class="plate">
+                <img id={`plate-${index}`} src={plate.url} alt={`plate ${index}`} />
                 <span>
                   {index + 1}/{this.plates.length}
                 </span>
@@ -73,20 +62,16 @@ export class SlidesExample {
               </ion-row>
               <ion-row>
                 <ion-col>
-                  <ion-button disabled={index === 0} onClick={this.prev.bind(this)} expand="block">
-                    Previous
-                  </ion-button>
+                  <app-button to={routes.slides.url} secondary value="Previous" disabled={index === 0} clickHandler={this.prev.bind(this)} expand="block" />
                 </ion-col>
                 <ion-col>
-                  <ion-button onClick={this.next.bind(this)} expand="block">
-                    Next
-                  </ion-button>
+                  <app-button to={routes.slides.url} value="Next" clickHandler={this.next.bind(this)} expand="block" />
                 </ion-col>
               </ion-row>
             </ion-slide>
           ))}
         </ion-slides>
-      </ion-content>,
-    ];
+      </div>
+    );
   }
 }
