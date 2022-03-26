@@ -12,12 +12,10 @@ import { Plate } from '../../types/plate';
 export class SliderPage {
   @Element() el: HTMLElement;
   @State() slides: HTMLIonSlidesElement;
+  @State() slideIndex: number = 0;
   @State() plates: Plate[] = state.plates;
   private router: HTMLIonRouterElement = document.querySelector('ion-router');
-  private slideOpts = {
-    initialSlide: 0,
-    speed: 400,
-  };
+  private slideOpts = { initialSlide: 0, speed: 400 };
 
   componentDidLoad() {
     this.slides = this.el.querySelector('ion-slides');
@@ -35,10 +33,12 @@ export class SliderPage {
     } else {
       this.slides.slideNext();
     }
+    if (this.slideIndex < this.plates?.length - 1) this.slideIndex++;
   }
 
   prev() {
     this.slides.slidePrev();
+    if (this.slideIndex > 0) this.slideIndex--;
   }
 
   render() {

@@ -1,7 +1,6 @@
 import { Component, h, State } from '@stencil/core';
 import routes from '../helpers/routes';
 import { loadPlates } from '../helpers/utils';
-import state from '../store';
 
 @Component({
   tag: 'app-root',
@@ -27,7 +26,6 @@ export class AppRoot {
           {Object.values(routes).map(({ url, component }) => (
             <ion-route url={url} component={component} />
           ))}
-          <img src={state.plates[0].url} />
         </ion-router>
         <ion-nav />
       </app-layout>
