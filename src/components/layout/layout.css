@@ -5,10 +5,14 @@ ion-header ion-title {
   left: 50%;
   transform: translate(-50%, -50%);
   line-height: 0;
+  width: 100%;
+}
+
+.md ion-header.sc-app-layout ion-title.sc-app-layout   {
+  width: 80%;
 }
 
 ion-header ion-title img {
-  width: 160px;
   margin: auto;
 }
 

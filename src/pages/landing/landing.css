@@ -5,12 +5,20 @@
   margin: 30px 0 40px 0;
 }
 
-h3 {
-  font-family: 'Montserrat', sans-serif;
-  text-align: center;
-  font-size: 20px;
+h2 {
+  font-family: 'Proxima Nova';
 }
 
 p {
   text-align: center;
+  margin-bottom: 40px;
+}
+
+.container img {
+  width: 320px;
+}
+
+.caption {
+  text-align: center;
+  font-size: 20px;
 }
