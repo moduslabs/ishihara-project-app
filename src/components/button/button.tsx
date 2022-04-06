@@ -12,11 +12,14 @@ export class Button {
   @Prop() disabled?: boolean;
   @Prop() secondary?: boolean = false;
   @Prop() clickHandler: (e: MouseEvent) => void;
-  props: any = this.secondary ? { fill: 'outline' } : { fill: 'solid' };
+  props: any = {
+    ...(this.secondary ? { fill: 'outline' } : { fill: 'solid' }),
+    ...(this.to ? { href: this.to } : {}),
+  };
 
   render() {
     return (
-      <ion-button shape="round" expand={this.expand} disabled={this.disabled} href={this.to} onClick={this.clickHandler} {...this.props}>
+      <ion-button shape="round" expand={this.expand} disabled={this.disabled} onClick={this.clickHandler} {...this.props}>
         {this.value}
       </ion-button>
     );

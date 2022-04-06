@@ -1,6 +1,8 @@
-import { Component, h } from '@stencil/core';
+import { Component, State, h } from '@stencil/core';
+import { Share } from '@capacitor/share';
 import cx from 'classnames';
 import state from '../../store';
+import { Screenshot } from '@ionic-native/screenshot';
 
 @Component({
   tag: 'app-result',
@@ -8,17 +10,42 @@ import state from '../../store';
   scoped: true,
 })
 export class ResultPage {
-  render() {
-    const correctPlates = state.plates.filter(plate => plate.key === plate.answer);
+  @State() canShare: boolean;
+  correctPlates = state.plates.filter(plate => plate.key === plate.answer);
+  scorePercentage = ((this.correctPlates.length / state.plates.length) * 100).toFixed(0);
+  result = `${this.correctPlates.length}/${state.plates.length} (${this.scorePercentage}%)`;
 
-    const scorePercentage = ((correctPlates.length / state.plates.length) * 100).toFixed(0);
+  async componentWillLoad() {
+    this.canShare = (await Share.canShare())?.value;
+  }
+
+  handleShare() {
+    let url = { value: '' };
+    Screenshot.save('jpg', 100).then(s => {
+      url.value = `file://${s.filePath}`;
+    })
+    .catch(() => {
+      url.value = '';
+    })
+    .finally(() => {
+      const message = `Hey👋, I - ${url.value} - scored ${this.result} on my Ishihara test`;
+      Share.share({
+        title: message,
+        text: message,
+        url: url.value,
+        dialogTitle: message,
+      });
+    });
+  }
+
+  render() {
     return (
       <div class="ion-padding">
         <h2>Color Deficiency Test Report</h2>
         <div class="result">
           <h3>Test result</h3>
           <p>
-            {correctPlates.length}/{state.plates.length} ({scorePercentage}%)
+            {this.correctPlates.length}/{state.plates.length} ({this.scorePercentage}%)
           </p>
         </div>
 
@@ -50,9 +77,14 @@ export class ResultPage {
           })}
         </ion-grid>
         <p class="caption">These are sample results and do not constitute medical advice</p>
-        <div class="center">
-          <app-button to="/" value="Retake" />
-        </div>
+        <ion-row>
+          <ion-col>
+            <app-button clickHandler={this.handleShare.bind(this)} value="Share" expand="block" />
+          </ion-col>
+          <ion-col>
+            <app-button to="/" value="Retake" expand="block" />
+          </ion-col>
+        </ion-row>
       </div>
     );
   }
