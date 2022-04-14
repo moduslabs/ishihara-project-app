@@ -1,4 +1,5 @@
 import { Component, h, State } from '@stencil/core';
+import { SplashScreen } from '@capacitor/splash-screen';
 import routes from '../helpers/routes';
 import { loadPlates } from '../helpers/utils';
 
@@ -10,6 +11,7 @@ export class AppRoot {
 
   async componentWillLoad() {
     await loadPlates();
+    await SplashScreen.hide();
   }
 
   async handlePageEnter(e) {
