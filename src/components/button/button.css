@@ -3,3 +3,10 @@ ion-button {
   max-width: 360px;
   margin: auto;
 }
+
+ .button-solid {
+  --background-activated: var(--ion-color-primary);
+  --background-focused: var(--ion-color-primary);
+  --background-hover: var(--ion-color-primary);
+  --background: var(--ion-color-primary);
+}
