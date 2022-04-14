@@ -28,6 +28,7 @@
     "@capacitor/android": "^3.4.1",
     "@capacitor/core": "^3.4.1",
     "@capacitor/ios": "^3.4.3",
+    "@capacitor/keyboard": "^1.2.2",
     "@capacitor/share": "^1.1.2",
     "@ionic-native/screenshot": "^5.36.0",
     "@stencil/store": "^1.5.0",

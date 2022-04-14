@@ -2,5 +2,11 @@
   "appId": "com.modus.ishihara.app",
   "appName": "Ishihara",
   "webDir": "www",
-  "bundledWebRuntime": false
+  "bundledWebRuntime": false,
+  "plugins": {
+    "Keyboard": {
+      "resize": "ionic",
+      "resizeOnFullScreen": true
+    }
+  }
 }
