@@ -6,6 +6,7 @@ import { Component, Prop, h } from '@stencil/core';
   shadow: true,
 })
 export class Button {
+  @Prop() id?: string;
   @Prop() to?: string;
   @Prop() value: string | number;
   @Prop() expand?: 'block' | 'full';
