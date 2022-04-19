@@ -10,7 +10,6 @@ export namespace Components {
         "clickHandler": (e: MouseEvent) => void;
         "disabled"?: boolean;
         "expand"?: 'block' | 'full';
-        "id"?: string;
         "secondary"?: boolean;
         "to"?: string;
         "value": string | number;
@@ -78,7 +77,6 @@ declare namespace LocalJSX {
         "clickHandler"?: (e: MouseEvent) => void;
         "disabled"?: boolean;
         "expand"?: 'block' | 'full';
-        "id"?: string;
         "secondary"?: boolean;
         "to"?: string;
         "value"?: string | number;

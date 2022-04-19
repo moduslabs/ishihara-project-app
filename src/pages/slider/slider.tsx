@@ -49,7 +49,7 @@ export class SliderPage {
           {this.plates?.map((plate, index) => (
             <ion-slide>
               <div class="plate">
-                <img id={`plate-${index}`} src={plate.url} alt={`plate ${index}`} />
+                <img data-testid={`plate-${index}`} src={plate.url} alt={`plate ${index}`} />
                 <span>
                   {index + 1}/{this.plates.length}
                 </span>
@@ -57,15 +57,15 @@ export class SliderPage {
               <ion-row class="input-container">
                 <ion-label>Enter what you see</ion-label>
                 <ion-col>
-                  <ion-input id="user-input" class="uppercase" autofocus value={plate.answer} onInput={e => this.handleChange(e, plate)}></ion-input>
+                  <ion-input data-testid="user-input" class="uppercase" autofocus value={plate.answer} onInput={e => this.handleChange(e, plate)}></ion-input>
                 </ion-col>
               </ion-row>
               <ion-row>
                 <ion-col>
-                  <app-button id={`prev-btn-${index}`} to={routes.slides.url} secondary value="Previous" disabled={index === 0} clickHandler={this.prev.bind(this)} expand="block" />
+                  <app-button data-testid={`prev-btn-${index}`} to={routes.slides.url} secondary value="Previous" disabled={index === 0} clickHandler={this.prev.bind(this)} expand="block" />
                 </ion-col>
                 <ion-col>
-                  <app-button id={`next-btn-${index}`} to={routes.slides.url} value="Next" clickHandler={this.next.bind(this)} expand="block" />
+                  <app-button data-testid={`next-btn-${index}`} to={routes.slides.url} value="Next" clickHandler={this.next.bind(this)} expand="block" />
                 </ion-col>
               </ion-row>
             </ion-slide>

@@ -44,7 +44,7 @@ export class ResultPage {
         <h2>Color Deficiency Test Report</h2>
         <div class="result">
           <h3>Test result</h3>
-          <p id="percentage">
+          <p data-testid="percentage">
             {this.correctPlates.length}/{state.plates.length} ({this.scorePercentage}%)
           </p>
         </div>
@@ -57,7 +57,7 @@ export class ResultPage {
           </ion-row>
           {state.plates?.map(({ answer, key }, index) => {
             return (
-              <ion-row id={`result-row-${index}`}>
+              <ion-row data-testid={`result-row-${index}`}>
                 <ion-col size="4">{index + 1}</ion-col>
                 <ion-col
                   size="4"
@@ -76,13 +76,13 @@ export class ResultPage {
             );
           })}
         </ion-grid>
-        <p id="result-caption" class="caption">These are sample results and do not constitute medical advice</p>
+        <p data-testid="result-caption" class="caption">These are sample results and do not constitute medical advice</p>
         <ion-row>
           <ion-col>
-            <app-button clickHandler={this.handleShare.bind(this)} value="Share" expand="block" />
+            <app-button data-testid="share-btn" clickHandler={this.handleShare.bind(this)} value="Share" expand="block" />
           </ion-col>
           <ion-col>
-            <app-button to="/" value="Retake" expand="block" />
+            <app-button data-testid="retake-btn" to="/" value="Retake" expand="block" />
           </ion-col>
         </ion-row>
       </div>
