@@ -9,15 +9,19 @@ import routes from '../../helpers/routes';
 export class LandingPage {
   render() {
     return (
-      <div class="ion-padding">
-        <h2 id="landing-page-title">Ishihara Color Blindness Test</h2>
-        <div class="container">
-          <img id="landing-page-image" src="/assets/images/cover-isihara.png" alt="Ishihara" />
+      <app-layout hasBack={false}>
+        <div class="ion-padding">
+          <h2 data-testid="landing-page-title">Ishihara Color Blindness Test</h2>
+          <div class="container">
+            <img data-testid="landing-page-image" src="/assets/images/cover-isihara.png" alt="Ishihara" />
+          </div>
+          <h3 data-testid="landing-page-caption">Optometry Color Deficiency Test</h3>
+          <p data-testid="landing-page-text">
+            The Ishihara test is a color perception test for color deficiencies, the first in a class of successful color vision tests called pseudo-isochromatic plates
+          </p>
+          <app-button dataTestId="landing-page-btn" to={routes.slides.url} value="Get Started" expand="block" />
         </div>
-        <h3 id="landing-page-caption">Optometry Color Deficiency Test</h3>
-        <p id="landing-page-text">The Ishihara test is a color perception test for color deficiencies, the first in a class of successful color vision tests called pseudo-isochromatic plates</p>
-        <app-button id="landing-page-btn" to={routes.slides.url} value="Get Started" expand="block" />
-      </div>
+      </app-layout>
     );
   }
 }
