@@ -21,21 +21,22 @@ export class ResultPage {
 
   handleShare() {
     let url = { value: '' };
-    Screenshot.save('jpg', 100).then(s => {
-      url.value = `file://${s.filePath}`;
-    })
-    .catch(() => {
-      url.value = '';
-    })
-    .finally(() => {
-      const message = `Hey👋, I - ${url.value} - scored ${this.result} on my Ishihara test`;
-      Share.share({
-        title: message,
-        text: message,
-        url: url.value,
-        dialogTitle: message,
+    Screenshot.save('jpg', 100)
+      .then(s => {
+        url.value = `file://${s.filePath}`;
+      })
+      .catch(() => {
+        url.value = '';
+      })
+      .finally(() => {
+        const message = `Hey👋, I - ${url.value} - scored ${this.result} on my Ishihara test`;
+        Share.share({
+          title: message,
+          text: message,
+          url: url.value,
+          dialogTitle: message,
+        });
       });
-    });
   }
 
   render() {
@@ -58,15 +59,18 @@ export class ResultPage {
           {state.plates?.map(({ answer, key }, index) => {
             return (
               <ion-row id={`result-row-${index}`}>
-                <ion-col size="4">{index + 1}</ion-col>
-                <ion-col
-                  size="4"
-                  class={cx('white', {
-                    'no-answer': !answer,
-                    'flawed': key !== answer,
-                    'flawless': key === answer,
-                  })}
-                >
+                <ion-col size="4">
+                  <ion-icon
+                    class={cx('result-icon', {
+                      'no-answer': !answer,
+                      'flawed': key !== answer,
+                      'flawless': key === answer,
+                    })}
+                    name={!answer ? 'remove-circle' : key === answer ? 'checkmark-circle' : 'close-circle'}
+                  ></ion-icon>
+                  {index + 1}
+                </ion-col>
+                <ion-col size="4" class={cx({ bold: answer })}>
                   {answer || '(no answer)'}
                 </ion-col>
                 <ion-col size="4" class="bold">
@@ -76,7 +80,9 @@ export class ResultPage {
             );
           })}
         </ion-grid>
-        <p id="result-caption" class="caption">These are sample results and do not constitute medical advice</p>
+        <p id="result-caption" class="caption">
+          These are sample results and do not constitute medical advice
+        </p>
         <ion-row>
           <ion-col>
             <app-button clickHandler={this.handleShare.bind(this)} value="Share" expand="block" />
