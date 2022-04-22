@@ -39,8 +39,11 @@
 }
 
 .table ion-icon.result-icon {
+  font-size: 20px;
   position: absolute;
   left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .table ion-icon.flawless {
