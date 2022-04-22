@@ -36,42 +36,52 @@ export class SliderPage {
     if (this.slideIndex < this.plates?.length - 1) this.slideIndex++;
   }
 
-  prev() {
+  async prev() {
     this.slides.slidePrev();
     if (this.slideIndex > 0) this.slideIndex--;
   }
 
   render() {
     return (
-      <div class="ion-padding">
-        <h2>Color Deficiency Test</h2>
-        <ion-slides options={this.slideOpts}>
-          {this.plates?.map((plate, index) => (
-            <ion-slide>
-              <div class="plate">
-                <img id={`plate-${index}`} src={plate.url} alt={`plate ${index}`} />
-                <span>
-                  {index + 1}/{this.plates.length}
-                </span>
-              </div>
-              <ion-row class="input-container">
-                <ion-label>Enter what you see</ion-label>
-                <ion-col>
-                  <ion-input id="user-input" class="uppercase" autofocus value={plate.answer} onInput={e => this.handleChange(e, plate)}></ion-input>
-                </ion-col>
-              </ion-row>
-              <ion-row>
-                <ion-col>
-                  <app-button id={`prev-btn-${index}`} to={routes.slides.url} secondary value="Previous" disabled={index === 0} clickHandler={this.prev.bind(this)} expand="block" />
-                </ion-col>
-                <ion-col>
-                  <app-button id={`next-btn-${index}`} to={routes.slides.url} value="Next" clickHandler={this.next.bind(this)} expand="block" />
-                </ion-col>
-              </ion-row>
-            </ion-slide>
-          ))}
-        </ion-slides>
-      </div>
+      <app-layout>
+        <div class="ion-padding">
+          <h2>Color Deficiency Test</h2>
+          <ion-slides options={this.slideOpts}>
+            {this.plates?.map((plate, index) => (
+              <ion-slide>
+                <div class="plate">
+                  <img data-testid={`plate-${index}`} src={plate.url} alt={`plate ${index}`} />
+                  <span>
+                    {index + 1}/{this.plates.length}
+                  </span>
+                </div>
+                <ion-row class="input-container">
+                  <ion-label>Enter what you see</ion-label>
+                  <ion-col>
+                    <ion-input data-testid="user-input" class="uppercase" autofocus value={plate.answer} onInput={e => this.handleChange(e, plate)}></ion-input>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <app-button
+                      dataTestId={`prev-btn-${index}`}
+                      to={routes.slides.url}
+                      secondary
+                      value="Previous"
+                      disabled={index === 0}
+                      clickHandler={this.prev.bind(this)}
+                      expand="block"
+                    />
+                  </ion-col>
+                  <ion-col>
+                    <app-button dataTestId={`next-btn-${index}`} to={routes.slides.url} value="Next" clickHandler={this.next.bind(this)} expand="block" />
+                  </ion-col>
+                </ion-row>
+              </ion-slide>
+            ))}
+          </ion-slides>
+        </div>
+      </app-layout>
     );
   }
 }

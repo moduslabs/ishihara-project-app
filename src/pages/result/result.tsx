@@ -41,57 +41,59 @@ export class ResultPage {
 
   render() {
     return (
-      <div class="ion-padding">
-        <h2>Color Deficiency Test Report</h2>
-        <div class="result">
-          <h3>Test result</h3>
-          <p id="percentage">
-            {this.correctPlates.length}/{state.plates.length} ({this.scorePercentage}%)
-          </p>
-        </div>
+      <app-layout>
+        <div class="ion-padding">
+          <h2>Color Deficiency Test Report</h2>
+          <div class="result">
+            <h3>Test result</h3>
+            <p data-testid="percentage">
+              {this.correctPlates.length}/{state.plates.length} ({this.scorePercentage}%)
+            </p>
+          </div>
 
-        <ion-grid class="table">
-          <ion-row class="table-header">
-            <ion-col size="4">Plate</ion-col>
-            <ion-col size="4">Your answer</ion-col>
-            <ion-col size="4">Correct</ion-col>
+          <ion-grid class="table">
+            <ion-row class="table-header">
+              <ion-col size="4">Plate</ion-col>
+              <ion-col size="4">Your answer</ion-col>
+              <ion-col size="4">Correct</ion-col>
+            </ion-row>
+            {state.plates?.map(({ answer, key }, index) => {
+              return (
+                <ion-row data-testid={`result-row-${index}`}>
+                  <ion-col size="4">
+                    <ion-icon
+                      class={cx('result-icon', {
+                        'no-answer': !answer,
+                        'flawed': key !== answer,
+                        'flawless': key === answer,
+                      })}
+                      name={!answer ? 'remove-circle' : key === answer ? 'checkmark-circle' : 'close-circle'}
+                    ></ion-icon>
+                    {index + 1}
+                  </ion-col>
+                  <ion-col size="4" class={cx({ bold: answer })}>
+                    {answer || '(no answer)'}
+                  </ion-col>
+                  <ion-col size="4" class="bold">
+                    {key}
+                  </ion-col>
+                </ion-row>
+              );
+            })}
+          </ion-grid>
+          <p data-testid="result-caption" class="caption">
+            These are sample results and do not constitute medical advice
+          </p>
+          <ion-row>
+            <ion-col>
+              <app-button dataTestId="share-result" clickHandler={this.handleShare.bind(this)} value="Share" expand="block" />
+            </ion-col>
+            <ion-col>
+              <app-button dataTestId="retake-test" to="/" value="Retake" expand="block" />
+            </ion-col>
           </ion-row>
-          {state.plates?.map(({ answer, key }, index) => {
-            return (
-              <ion-row id={`result-row-${index}`}>
-                <ion-col size="4">
-                  <ion-icon
-                    class={cx('result-icon', {
-                      'no-answer': !answer,
-                      'flawed': key !== answer,
-                      'flawless': key === answer,
-                    })}
-                    name={!answer ? 'remove-circle' : key === answer ? 'checkmark-circle' : 'close-circle'}
-                  ></ion-icon>
-                  {index + 1}
-                </ion-col>
-                <ion-col size="4" class={cx({ bold: answer })}>
-                  {answer || '(no answer)'}
-                </ion-col>
-                <ion-col size="4" class="bold">
-                  {key}
-                </ion-col>
-              </ion-row>
-            );
-          })}
-        </ion-grid>
-        <p id="result-caption" class="caption">
-          These are sample results and do not constitute medical advice
-        </p>
-        <ion-row>
-          <ion-col>
-            <app-button clickHandler={this.handleShare.bind(this)} value="Share" expand="block" />
-          </ion-col>
-          <ion-col>
-            <app-button to="/" value="Retake" expand="block" />
-          </ion-col>
-        </ion-row>
-      </div>
+        </div>
+      </app-layout>
     );
   }
 }
