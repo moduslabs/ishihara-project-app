@@ -2,6 +2,8 @@ import { Component, h, State } from '@stencil/core';
 import { SplashScreen } from '@capacitor/splash-screen';
 import routes from '../helpers/routes';
 import { loadPlates } from '../helpers/utils';
+import { ScreenOrientation } from '@ionic-native/screen-orientation';
+import { Capacitor } from '@capacitor/core';
 
 @Component({
   tag: 'app-root',
@@ -10,6 +12,11 @@ export class AppRoot {
   @State() hasBack: boolean = false;
 
   async componentWillLoad() {
+
+    if (Capacitor.getPlatform() === 'android') {
+      ScreenOrientation.lock(ScreenOrientation.ORIENTATIONS.PORTRAIT);
+    }
+
     await loadPlates();
     await SplashScreen.hide();
   }
