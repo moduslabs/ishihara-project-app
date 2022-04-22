@@ -4,6 +4,10 @@
   "webDir": "www",
   "bundledWebRuntime": false,
   "plugins": {
+    "Keyboard": {
+      "resize": "ionic",
+      "resizeOnFullScreen": true
+    },
     "SplashScreen": {
       "launchAutoHide": false,
       "splashImmersive": true
