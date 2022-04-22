@@ -1,19 +1,25 @@
-ion-header ion-title {
-  font-weight: 900;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  line-height: 0;
-  width: 100%;
+:host {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-.md ion-header.sc-app-layout ion-title.sc-app-layout   {
+ion-header ion-title {
+  line-height: 0;
+}
+
+.ishihara-logo {
+  display: flex;
+  justify-content: center;
+}
+
+.md ion-header.sc-app-layout ion-title.sc-app-layout {
   width: 80%;
 }
 
 ion-header ion-title img {
   margin: auto;
+  max-width: 200px;
 }
 
 ion-footer {

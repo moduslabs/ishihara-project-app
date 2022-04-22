@@ -75,11 +75,6 @@
   font-size: 14px;
 }
 
-.ion-page {
-  overflow-y: auto !important;
-  background-color: var(--ion-color-white);
-}
-
 h2 {
   text-align: center;
   margin-top: 15px;
