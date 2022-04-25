@@ -31,9 +31,12 @@
     "@capacitor/keyboard": "^1.2.2",
     "@capacitor/share": "^1.1.2",
     "@capacitor/splash-screen": "^1.2.2",
+    "@ionic-native/screen-orientation": "^5.36.0",
     "@ionic-native/screenshot": "^5.36.0",
     "@stencil/store": "^1.5.0",
     "classnames": "^2.3.1",
-    "cordova-plugin-screenshot": "https://github.com/gitawego/cordova-screenshot.git"
+    "cordova-plugin-screen-orientation": "^3.0.2",
+    "cordova-plugin-screenshot": "https://github.com/gitawego/cordova-screenshot.git",
+    "es6-promise-plugin": "^4.2.2"
   }
 }

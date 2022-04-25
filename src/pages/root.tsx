@@ -7,9 +7,13 @@ import { loadPlates } from '../helpers/utils';
   tag: 'app-root',
 })
 export class AppRoot {
+  connectedCallback() {
+    SplashScreen.hide();
+    window.screen.orientation.lock('portrait-primary');
+  }
+
   async componentWillLoad() {
     await loadPlates();
-    await SplashScreen.hide();
   }
 
   async handlePageEnter(e) {
