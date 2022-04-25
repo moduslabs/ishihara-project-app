@@ -33,7 +33,6 @@
     "@ionic-native/screenshot": "^5.36.0",
     "@stencil/store": "^1.5.0",
     "classnames": "^2.3.1",
-    "cordova-plugin-screen-orientation": "^3.0.2",
     "cordova-plugin-screenshot": "https://github.com/gitawego/cordova-screenshot.git"
   }
 }
