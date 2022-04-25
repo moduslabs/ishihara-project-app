@@ -60,15 +60,18 @@ export class ResultPage {
             {state.plates?.map(({ answer, key }, index) => {
               return (
                 <ion-row data-testid={`result-row-${index}`}>
-                  <ion-col size="4">{index + 1}</ion-col>
-                  <ion-col
-                    size="4"
-                    class={cx('white', {
-                      'no-answer': !answer,
-                      'flawed': key !== answer,
-                      'flawless': key === answer,
-                    })}
-                  >
+                  <ion-col size="4">
+                    <ion-icon
+                      class={cx('result-icon', {
+                        'no-answer': !answer,
+                        'flawed': key !== answer,
+                        'flawless': key === answer,
+                      })}
+                      name={!answer ? 'remove-circle' : key === answer ? 'checkmark-circle' : 'close-circle'}
+                    ></ion-icon>
+                    {index + 1}
+                  </ion-col>
+                  <ion-col size="4" class={cx({ bold: answer })}>
                     {answer || '(no answer)'}
                   </ion-col>
                   <ion-col size="4" class="bold">

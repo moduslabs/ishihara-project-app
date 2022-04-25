@@ -38,20 +38,28 @@
   border-top: 1px solid var(--ion-color-white);
 }
 
-.table ion-col.flawless {
-  background-color: var(--ion-color-green);
+.table ion-icon.result-icon {
+  font-size: 20px;
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
-.table ion-col.flawed {
-  background-color: var(--ion-color-red);
+.table ion-icon.flawless {
+  color: var(--ion-color-green);
 }
 
-.table ion-col.no-answer {
-  background-color: var(--ion-color-orange);
+.table ion-icon.flawed {
+  color: var(--ion-color-red);
+}
+
+.table ion-icon.no-answer {
+  color: var(--ion-color-orange);
 }
 
 .table ion-col.bold {
-  font-weight: 700;
+  font-weight: 500;
 }
 
 .table ion-col.white {
