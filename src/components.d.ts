@@ -8,6 +8,7 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface AppButton {
         "clickHandler": (e: MouseEvent) => void;
+        "dataTestId"?: string;
         "disabled"?: boolean;
         "expand"?: 'block' | 'full';
         "secondary"?: boolean;
@@ -75,6 +76,7 @@ declare global {
 declare namespace LocalJSX {
     interface AppButton {
         "clickHandler"?: (e: MouseEvent) => void;
+        "dataTestId"?: string;
         "disabled"?: boolean;
         "expand"?: 'block' | 'full';
         "secondary"?: boolean;

@@ -6,6 +6,7 @@ import { Component, Prop, h } from '@stencil/core';
   shadow: true,
 })
 export class Button {
+  @Prop() dataTestId?: string = '';
   @Prop() to?: string;
   @Prop() value: string | number;
   @Prop() expand?: 'block' | 'full';
@@ -19,7 +20,7 @@ export class Button {
 
   render() {
     return (
-      <ion-button shape="round" expand={this.expand} disabled={this.disabled} onClick={this.clickHandler} {...this.props}>
+      <ion-button shape="round" data-testid={this.dataTestId} expand={this.expand} disabled={this.disabled} onClick={this.clickHandler} {...this.props}>
         {this.value}
       </ion-button>
     );
