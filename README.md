@@ -2,25 +2,12 @@
 
 Ishihara is a proof of concept developed by Modus Create. This experimental app tests for color blindness using Ishihara plates and is built on Ionic, Stencil, and AWS
 
-## Features
-
-* `@ionic/core` for the UI.
-* Stencil for the application logic and routing
-* Push Notifications setup
-* Unit Tests
-* Pre-rendering
-* Lazy-loading and code splitting
-* Intelligent Polyfills
-* Modern mode: ES6/ESM for new browser, ES5 for older
-* Service Worker, App manifest, iOS meta tags
-* Theming using CSS variables
-
 ## Getting Started
 
 To start building, clone this repo to a new directory:
 
 ```bash
-npm init stencil ionic-pwa
+npm install
 ```
 
 ## Production
@@ -68,7 +55,7 @@ npm run test.watch
 
 ## Deployment to distribution platforms 
 
-### Submitting an App to the iOS App store:
+### Submitting to the iOS App store:
 
 Requirements
 
@@ -110,3 +97,43 @@ If the upload successfully, the app should be listed on iTunes Connect and liste
 ## Updating the App 
 
 An app can be updated by either submitting a new version to Apple.
+
+NB: In order for the iOS App Store to accept the updated build, the config.xml file will need to be edited to increment the version value, 
+    then rebuild the app for release following the same instructions above.
+
+
+### Submitting to the Google play store:
+
+To generate a release build for Android, build your web app and then run the following cli command
+
+```bash
+npx cap copy && npx cap sync
+```
+
+This will copy all web assets and sync any plugin changes.
+
+Next, open Android studio:
+
+```bash
+npx cap open android
+```
+### To create an AAB binary locally using Android Studio:
+
+* Open the Build menu
+* Choose Generate Signed Bundle / APK
+* Follow the prompts to sign the AAB with your keystore file
+
+[Read more for complete documnetation](https://developer.android.com/studio/publish/app-signing)
+
+Now that a release AAB/APK has been generated, [Google Play Store Developer Console](https://play.google.com/console/developers) is needed to upload to playstore.
+
+* Create an Application (This is already created for Ishihara)
+* Be sure to fill out the description for the app along with providing screenshots and additional info. When ready, upload the signed release 
+  AAB/APK that was generated and publish the app.
+
+## Updating the app
+
+An app can be updated by either submitting a new signed version to the Google Play Store
+
+NB: In order for the Google Play Store to accept updated AAB/APK, the android/app/build.gradle file will need to be edited to increment 
+    the versionCode value, then rebuild the app for release following the instructions above.
