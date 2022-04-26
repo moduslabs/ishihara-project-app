@@ -1,9 +1,6 @@
-# Ionic PWA Toolkit
+# Ishihara App
 
-The PWA Toolkit is a starting point for building Progressive Web Apps using Ionic and Stencil.
-This combination of tools gives you the ability to build a fast, efficient PWA out of the box.
-
-For more info check out our [homepage](https://ionicframework.com/pwa/toolkit)!
+Ishihara is a proof of concept developed by Modus Create. This experimental app tests for color blindness using Ishihara plates and is built on Ionic, Stencil, and AWS
 
 ## Features
 
@@ -26,7 +23,6 @@ To start building, clone this repo to a new directory:
 npm init stencil ionic-pwa
 ```
 
-
 ## Production
 
 To build for production, run:
@@ -41,23 +37,6 @@ A production build includes:
 * Generated Service workers
 * App manifest
 
-## Hosting
-
-Apps should be hosted on through HTTPS, and if possible, through a provider that supports HTTP2.
-One provider that does support this is [Firebase Hosting](https://firebase.google.com/docs/hosting/).
-
-## H2 Push
-
-We recommend setting up HTTP2 Push on Firebase. H2 Push may sound complicated, but it's actually a simple concept. To learn about it, take a look at this [article](https://en.wikipedia.org/wiki/HTTP/2_Server_Push).
-
-To set this up for `my-app`:
-
-* Do a production build of the app: `npm run build`
-* Serve your WWW folder locally using a local http server and open in your browser.
-  * https://www.npmjs.com/package/http-server works pretty well for this. You can serve your www folder by running `http-server www`.
-* Open the DevTools and look at the network tab.
-  * Reload the page and you should see all of your files show up in the network tab. Excluding the `sw.js` file, these are the files you want to H2 push.
-* List these files in the link headers of your firebase.json file. For a syntax reference, review this [article](https://w3c.github.io/preload/#server-push-http-2)
 
 ## Service Workers
 
@@ -87,8 +66,47 @@ To run the unit tests and watch for file changes during development, run:
 npm run test.watch
 ```
 
-## Testing your PWA's performance
+## Deployment to distribution platforms 
 
-We recommend using https://www.webpagetest.org/easy with the `Run Lighthouse Audit` option turned on.
-This will give you an in depth look into your app's load performance on the average device connected to the average network.
-For more info on how to use webpagetest check out [this article](https://zoompf.com/blog/2015/07/the-seo-experts-guide-to-web-performance-using-webpagetest-2)
+### Submitting an App to the iOS App store:
+
+Requirements
+
+* Xcode
+* Apple Developers account
+* A valid provisioning profile
+* App Development and Distribution certificates
+
+if plaform is not added, be sure to add it 
+
+```bash
+ npx capacitor add ios
+```
+
+```bash
+ npx capacitor run ios
+```
+
+## Generating Signing Certificates
+
+To create the certificates and profiles needed, contact the IOS department or visit [Apple's member center](https://help.apple.com/xcode/mac/current/#/dev3a05256b8)  and follow the links described in Apple's documentation.
+
+There are two types of certificates that matter here, Development, and Distribution. Development Certificates are just that, meant for development time. They are meant to sign an app and deploy it to devices that the certificate has access to.
+
+Distribution certs are meant for distributing an app to the store. When an app is signed with a Distribution cert, it can be installed on any device.
+
+
+## Signing the App in Xcode.
+
+After generating the correct certificates, there are options to either have Xcode automatically manage certificates or manually manage them. It's suggested to let Xcode automatically manage certificates. This will make sure that the correct Development and Distribution certs are used, based on the build type selected.
+
+With this option selected, select Archive from the Product > Archive menu. This will build a version of the app that is ready for distribution in the app stores. After archive has been created, Xcode Organizer is opened.
+
+Xcode Organizer displays a list with builds of the current app. Pick the last build and click 'Upload to App Store'. There should be a place to select the team followed by some more information on the app and a "Upload" button to click.
+
+If the upload successfully, the app should be listed on iTunes Connect and listed in 'Activities'. From there, TestFlight can be enabled for beta testing, or the App can be sent for approval from Apple.
+
+
+## Updating the App 
+
+An app can be updated by either submitting a new version to Apple.
