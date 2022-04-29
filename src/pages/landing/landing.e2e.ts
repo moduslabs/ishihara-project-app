@@ -9,11 +9,12 @@ describe('app-landing', () => {
     expect(element).toHaveClass('hydrated');
   });
 
-  it('contains a "Profile Page" button', async () => {
+  it('contains a "Get Started" button', async () => {
     const page = await newE2EPage();
     await page.setContent('<app-landing></app-landing>');
 
-    const element = await page.find('app-landing app-button ion-button');
-    expect(element.textContent).toEqual('Profile page');
+    const element = await page.find('app-landing app-button');
+    expect(element).not.toBeNull();
+    expect(element).toHaveClass('hydrated');
   });
 });

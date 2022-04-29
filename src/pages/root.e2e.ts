@@ -11,7 +11,7 @@ describe('app-root', () => {
   it('renders an ion-app', async () => {
     const page = await newE2EPage({ url: '/' });
 
-    const element = await page.find('app-root > ion-content');
+    const element = await page.find('app-root > ion-app');
     expect(element).toHaveClass('hydrated');
   });
 });
