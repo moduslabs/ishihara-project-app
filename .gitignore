@@ -22,6 +22,7 @@ $RECYCLE.BIN/
 
 android/
 ios/
+configure/configure.js
 
 .DS_Store
 Thumbs.db
