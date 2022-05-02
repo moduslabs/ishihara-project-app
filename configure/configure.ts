@@ -16,7 +16,6 @@ const updateProject = async () => {
     await project.load();
 
    project.android?.getAndroidManifest().setAttrs('manifest/application', {
-    'android:name': 'com.modus.ishihara.app.MainActivity',   
     'android:screenOrientation': 'portrait',
     'android:label':'Ishihara'
   });
