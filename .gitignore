@@ -20,7 +20,16 @@ log.txt
 node_modules/
 $RECYCLE.BIN/
 
-android/
+!android/
+android/*
+!android/app/
+android/app/*
+!android/app/src/
+android/app/src/*
+!android/app/src/main/
+android/app/src/main/*
+!android/app/src/main/AndroidManifest.xml
+
 ios/
 
 .DS_Store
