@@ -2,11 +2,16 @@ import { LandingPage } from './landing';
 import { newSpecPage } from '@stencil/core/testing';
 
 describe('app-landing', () => {
-  it('renders', async () => {
-    const { root } = await newSpecPage({
+  it('should build', () => {
+    expect(new LandingPage()).toBeTruthy();
+  });
+
+  it('renders landing page with a title', async () => {
+    const page = await newSpecPage({
       components: [LandingPage],
       html: '<app-landing></app-landing>',
     });
-    expect(root.querySelector('ion-title').textContent).toEqual('Home');
+    const pageTitle = await page.root.querySelector('[data-testid="landing-page-title"]').textContent
+    expect(pageTitle).toEqual('Ishihara Color Blindness Test');
   });
 });

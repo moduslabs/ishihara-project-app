@@ -58,7 +58,14 @@ export class SliderPage {
                 <ion-row class="input-container">
                   <ion-label>Enter what you see</ion-label>
                   <ion-col>
-                    <ion-input data-testid="user-input" class="uppercase" autofocus value={plate.answer} onInput={e => this.handleChange(e, plate)}></ion-input>
+                    <ion-input
+                      data-testid="user-input"
+                      class="uppercase"
+                      autofocus
+                      autocapitalize="capitalize"
+                      value={plate.answer}
+                      onInput={e => this.handleChange(e, plate)}
+                    ></ion-input>
                   </ion-col>
                 </ion-row>
                 <ion-row>

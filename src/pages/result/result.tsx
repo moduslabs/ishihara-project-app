@@ -29,7 +29,7 @@ export class ResultPage {
         url.value = '';
       })
       .finally(() => {
-        const message = `Hey👋, I - ${url.value} - scored ${this.result} on my Ishihara test`;
+        const message = `Hey👋, I scored ${this.result} on my Ishihara test`;
         Share.share({
           title: message,
           text: message,
