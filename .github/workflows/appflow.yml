@@ -1,0 +1,31 @@
+name: Ionic Appflow
+
+on:
+  pull_request
+
+jobs:
+  build-android-app:
+    runs-on: ubuntu-latest
+    name: Build Android on Appflow
+    steps:
+      - name: Build Android on Appflow
+        uses: ionic-team/appflow-build@v1
+        with:
+          token: ${{ secrets.APPFLOW_TOKEN }}
+          app-id: "com.modus.ishihara.app"
+          platform: Android
+          build-type: development
+          upload-artifact: Android-build.zip
+
+  build-ios-app:
+    runs-on: ubuntu-latest
+    name: Build iOS on Appflow
+    steps:
+      - name: Build iOS on Appflow
+        uses: ionic-team/appflow-build@v1
+        with:
+          token: ${{ secrets.APPFLOW_TOKEN }}
+          app-id: "com.modus.ishihara.app"
+          platform: iOS
+          build-type: development
+          upload-artifact: iOS-build.zip
