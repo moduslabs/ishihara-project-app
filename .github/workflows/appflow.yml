@@ -14,7 +14,7 @@ jobs:
           token: ${{ secrets.APPFLOW_TOKEN }}
           app-id: ${{ secrets.IONIC_APP_ID }}
           platform: Android
-          build-type: development
+          build-type: debug
           upload-artifact: Android-build.zip
 
   build-ios-app:
