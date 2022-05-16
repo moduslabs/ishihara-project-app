@@ -20,7 +20,6 @@ log.txt
 node_modules/
 $RECYCLE.BIN/
 
-android/
 ios/
 configure/configure.js
 
