@@ -11,9 +11,11 @@ import { Screenshot } from '@ionic-native/screenshot';
 })
 export class ResultPage {
   @State() canShare: boolean;
+  @State() resultRecommendation: string;
   correctPlates = state.plates.filter(plate => plate.key === plate.answer);
   scorePercentage = ((this.correctPlates.length / state.plates.length) * 100).toFixed(0);
   result = `${this.correctPlates.length}/${state.plates.length} (${this.scorePercentage}%)`;
+  recommendation = this.getResultRecommendation();
 
   async componentWillLoad() {
     this.canShare = (await Share.canShare())?.value;
@@ -39,6 +41,25 @@ export class ResultPage {
       });
   }
 
+  /**
+   * Get a recommendation based on the score percentage
+   *
+   * - [100%]: Great score, no recommendation.
+   * - [60% - 80%]: Good score, recommend to see an opthalmologist.
+   * - [Less than 60%]: Bad score, recommend to see a opthamologist.
+   */
+  getResultRecommendation(): string {
+    const score = Number(this.scorePercentage);
+
+    if (score === 100) {
+      return 'Great! Enjoy the colors of life.';
+    } else if (score <= 80 && score >= 60) {
+      return 'Good! We recommend you see an opthamologist.';
+    } else {
+      return 'We recommend you see an opthamologist.';
+    }
+  }
+
   render() {
     return (
       <app-layout>
@@ -49,6 +70,7 @@ export class ResultPage {
             <p data-testid="percentage">
               {this.correctPlates.length}/{state.plates.length} ({this.scorePercentage}%)
             </p>
+            <p data-testid="recommendation" class="recommendation">{this.recommendation}</p>
           </div>
 
           <ion-grid class="table">
