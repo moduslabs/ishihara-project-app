@@ -37,4 +37,5 @@ jobs:
           app-id: ${{ secrets.IONIC_APP_ID }}
           platform: iOS
           build-type: development
+          certificate: "iOS development"
           upload-artifact: iOS-build.zip
