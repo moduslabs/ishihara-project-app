@@ -17,6 +17,15 @@ jobs:
           build-type: debug
           upload-artifact: Android-build.zip
 
+      - uses: actions/download-artifact@v3
+        with:
+          name: my-artifact
+          path: android/app/build/outputs
+
+      - name: Display structure of downloaded files
+        run: ls -R
+
+
   build-ios-app:
     runs-on: ubuntu-latest
     name: Build iOS on Appflow
