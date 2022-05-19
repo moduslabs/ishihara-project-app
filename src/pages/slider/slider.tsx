@@ -1,10 +1,10 @@
 import { Component, Element, h, State } from '@stencil/core';
 import state from '../../store';
-import { assertOnlyAlphanumericChars, capitalizePlateAnswer } from '../../helpers/utils';
+import { capitalizePlateAnswer } from '../../helpers/utils';
 import routes from '../../helpers/routes';
 import { Plate } from '../../types/plate';
 import { toastController } from '@ionic/core';
-import { SlideChangeDirection } from '../../types/slider';
+import { SlideChangeDirection, SliderInputState } from '../../types/slider';
 
 @Component({
   tag: 'app-slider',
@@ -16,12 +16,16 @@ export class SliderPage {
   @State() slides: HTMLIonSlidesElement;
   @State() slideIndex: number = 0;
   @State() plates: Plate[] = state.plates;
+  @State() inputState: SliderInputState = {
+    isDirty: false,
+    isValid: false,
+  };
   private router: HTMLIonRouterElement = document.querySelector('ion-router');
   private slideOpts = { initialSlide: 0, speed: 400 };
 
   componentDidLoad() {
     this.slides = this.el.querySelector('ion-slides');
-    this.slides.lockSwipeToNext(!this.plates[this.slideIndex].answer);
+    this.slides.lockSwipeToNext(true);
   }
 
   /**
@@ -29,40 +33,32 @@ export class SliderPage {
    *
    * This is called when the user enters an answer.
    * It updates the answer of the target plate and component state, and enables
-   * swiping to the next slide if an answer was entered.
+   * swiping to the next slide if a valid answer was entered.
    * @param e - Input event
    * @param index - Index of the plate the input is for
    */
-  handleInput(e: Event, index: number) {
-    const value = (e.target as HTMLInputElement).value;
+  async handleInput(e: Event, index: number) {
+    const inputEl = await (e.target as HTMLIonInputElement).getInputElement();
 
-    // Mutate the plates array state to trigger component update & re-render
-    this.plates = this.plates.map((plate, i) => {
-      if (i === index) {
-        plate.answer = value;
-      }
-      return plate;
-    });
+    // Set input state
+    this.inputState = {
+      isDirty: true,
+      isValid: inputEl.validity.valid,
+    };
+
+    // Update plate answer only if the input is valid
+    if (this.inputState.isValid) {
+      // Mutate the plates array state to trigger component update & re-render
+      this.plates = this.plates.map((plate, i) => {
+        if (i === index) {
+          plate.answer = inputEl.value;
+        }
+        return plate;
+      });
+    }
 
     // Enable swiping to the next slide - if an answer was entered
-    this.slides.lockSwipeToNext(!value);
-  }
-  
-  /**
-   * Handle keydown events
-   * 
-   * This is called when the user presses a key in the input field.
-   * It validates the input and allows only alphanumeric characters to be entered.
-   * @param e - Keyboard event
-   */
-  handleKeyDown(e: KeyboardEvent) {
-    /**
-     * Proceed only if key length is 1.
-     * If key length is greater than 1, it means key is a modifier key, e.g ctrl, shift, enter, etc.
-     */
-    if (e.key.length === 1 && !assertOnlyAlphanumericChars(e.key)) {
-      e.preventDefault();
-    }
+    this.slides.lockSwipeToNext(!this.inputState.isValid || !inputEl.value);
   }
 
   /**
@@ -96,12 +92,17 @@ export class SliderPage {
       case SlideChangeDirection.Next:
         if (this.slideIndex < this.plates?.length - 1) this.slideIndex++;
         break;
-    
+
       default:
         throw new Error(`Unknown slide change type: ${changeDirection}`);
     }
 
-    this.slides.lockSwipeToNext(!this.plates[this.slideIndex].answer);
+    // Update input state and enable/disable swiping to the next slide
+    this.inputState = {
+      isDirty: false,
+      isValid: !!this.plates[this.slideIndex].answer,
+    }
+    this.slides.lockSwipeToNext(!this.inputState.isValid || !this.plates[this.slideIndex].answer);
   }
 
   /**
@@ -180,18 +181,15 @@ export class SliderPage {
                       autofocus
                       autocapitalize="capitalize"
                       value={plate.answer}
-                      onInput={e => this.handleInput(e, index)}
-                      onKeyDown={e => this.handleKeyDown(e)}
+                      debounce={300}
+                      onIonInput={e => this.handleInput(e, index)}
+                      type="text"
+                      pattern="[A-Za-z0-9]*"
                     ></ion-input>
+                    {this.inputState.isDirty && !this.inputState.isValid ? <ion-label color="danger">Answer should be alphanumeric</ion-label> : null}
                   </ion-col>
-                  <ion-col>
-                    <app-button
-                      dataTestId={`skip-btn-${index}`}
-                      to={routes.slides.url}
-                      value="Skip"
-                      clickHandler={this.skip.bind(this, index)}
-                      expand="block"
-                    ></app-button>
+                  <ion-col class="ion-margin-top">
+                    <app-button dataTestId={`skip-btn-${index}`} to={routes.slides.url} value="Skip" clickHandler={this.skip.bind(this, index)} expand="block"></app-button>
                   </ion-col>
                 </ion-row>
                 <ion-row>
@@ -213,6 +211,7 @@ export class SliderPage {
                       value={index + 1 === this.plates.length ? 'Finish' : 'Next'}
                       clickHandler={this.next.bind(this, index)}
                       expand="block"
+                      disabled={!this.inputState.isValid || !this.plates[index].answer}
                     />
                   </ion-col>
                 </ion-row>
