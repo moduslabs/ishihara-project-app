@@ -20,7 +20,6 @@ log.txt
 node_modules/
 $RECYCLE.BIN/
 
-ios/
 configure/configure.js
 
 .DS_Store
