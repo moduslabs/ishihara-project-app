@@ -16,7 +16,3 @@ export async function loadPlates(): Promise<void> {
   state.plates = plates ? plates?.map(plate => ({ ...plate, answer: null })) : null;
   preRenderFirstPlateImage(state.plates[0].url);
 }
-
-export function assertOnlyAlphanumericChars(value: string): boolean {
-  return /^[a-zA-Z0-9]+$/.test(value);
-}
