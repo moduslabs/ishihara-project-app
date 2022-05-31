@@ -60,6 +60,20 @@ export class SliderPage {
     // Enable swiping to the next slide - if an answer was entered
     this.slides.lockSwipeToNext(!this.inputState.isValid || !inputEl.value);
   }
+  
+  /**
+   * Swipe over the current slide
+   *
+   * This is called when the user press the Enter key 
+   * @param e - Input event
+   * @param index - Index of the plate
+   */
+  handleKeyDown(e: KeyboardEvent, index: number) {
+    // Enable swiping to the next slide by pressing the keyboard enter key
+    if(e.key === "Enter") {
+      this.next(index);
+    }
+  }
 
   /**
    * Skip the current slide
@@ -183,6 +197,7 @@ export class SliderPage {
                       value={plate.answer}
                       debounce={300}
                       onIonInput={e => this.handleInput(e, index)}
+                      onKeyDown={e => this.handleKeyDown(e, index)}
                       type="text"
                       pattern="[A-Za-z0-9]*"
                     ></ion-input>
