@@ -7,10 +7,12 @@ const { state, onChange } = createStore({
     current: null,
     previous: null,
   },
+  loadingPlates: false,
 });
 
 onChange('plates', value => {
   state.plates = value;
+  state.loadingPlates = false;
 });
 
 onChange('pushHistory', ({ current, previous }) => {
