@@ -1,4 +1,6 @@
 import { h, Component, Prop } from '@stencil/core';
+import state from '../../store';
+
 @Component({
   tag: 'app-layout',
   styleUrl: 'layout.css',
@@ -6,11 +8,6 @@ import { h, Component, Prop } from '@stencil/core';
 })
 export class Layout {
   @Prop() hasBack: boolean = true;
-  private router: HTMLIonRouterElement = document.querySelector('ion-router');
-
-  handleGoBack = () => {
-    this.router.back();
-  };
 
   render() {
     return [
@@ -18,7 +15,7 @@ export class Layout {
         <ion-toolbar color="primary">
           {this.hasBack ? (
             <ion-buttons slot="start">
-              <ion-back-button defaultHref="/" onClick={this.handleGoBack}></ion-back-button>
+              <ion-back-button defaultHref={state.history[0]?.previous ?? '/'}></ion-back-button>
             </ion-buttons>
           ) : null}
           <ion-title>
