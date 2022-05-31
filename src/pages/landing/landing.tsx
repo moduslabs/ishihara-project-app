@@ -1,5 +1,6 @@
 import { Component, h } from '@stencil/core';
 import routes from '../../helpers/routes';
+import state from '../../store';
 
 @Component({
   tag: 'app-landing',
@@ -7,6 +8,12 @@ import routes from '../../helpers/routes';
   scoped: true,
 })
 export class LandingPage {
+  private router: HTMLIonRouterElement = document.querySelector('ion-router');
+
+  navigateToSlides = () => {
+    this.router.push(routes.slides.url, 'root');
+  };
+
   render() {
     return (
       <app-layout hasBack={false}>
@@ -19,7 +26,13 @@ export class LandingPage {
           <p data-testid="landing-page-text">
             The Ishihara test is a color perception test for color deficiencies, the first in a class of successful color vision tests called pseudo-isochromatic plates
           </p>
-          <app-button dataTestId="landing-page-btn" to={routes.slides.url} value="Get Started" expand="block" />
+          <app-button
+            dataTestId="landing-page-btn"
+            clickHandler={this.navigateToSlides}
+            value={state.loadingPlates ? 'Please wait...' : 'Get Started'}
+            expand="block"
+            disabled={state.loadingPlates}
+          />
         </div>
       </app-layout>
     );

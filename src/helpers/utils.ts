@@ -11,6 +11,7 @@ export const capitalizePlateAnswer = (plates: Plate[]): Plate[] => {
 };
 
 export async function loadPlates(): Promise<void> {
+  state.loadingPlates = true;
   const response = await fetch('https://b9jdjjz440.execute-api.us-east-1.amazonaws.com/test/plates?limit=15');
   const plates = await response.json();
   state.plates = plates ? plates?.map(plate => ({ ...plate, answer: null })) : null;
