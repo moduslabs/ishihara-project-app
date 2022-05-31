@@ -3,6 +3,7 @@ import { Share } from '@capacitor/share';
 import cx from 'classnames';
 import state from '../../store';
 import { Screenshot } from '@ionic-native/screenshot';
+import routes from '../../helpers/routes';
 
 @Component({
   tag: 'app-result',
@@ -11,6 +12,7 @@ import { Screenshot } from '@ionic-native/screenshot';
 })
 export class ResultPage {
   @State() canShare: boolean;
+  private router: HTMLIonRouterElement = document.querySelector('ion-router');
   correctPlates = state.plates.filter(plate => plate.key === plate.answer);
   scorePercentage = ((this.correctPlates.length / state.plates.length) * 100).toFixed(0);
   result = `${this.correctPlates.length}/${state.plates.length} (${this.scorePercentage}%)`;
@@ -18,6 +20,10 @@ export class ResultPage {
   async componentWillLoad() {
     this.canShare = (await Share.canShare())?.value;
   }
+
+  navigateToHome = () => {
+    this.router.push(routes.home.url, 'root');
+  };
 
   handleShare() {
     let url = { value: '' };
@@ -89,7 +95,7 @@ export class ResultPage {
               <app-button dataTestId="share-result" clickHandler={this.handleShare.bind(this)} value="Share" expand="block" />
             </ion-col>
             <ion-col>
-              <app-button dataTestId="retake-test" to="/" value="Retake" expand="block" />
+              <app-button dataTestId="retake-test" clickHandler={this.navigateToHome} value="Retake" expand="block" />
             </ion-col>
           </ion-row>
         </div>
