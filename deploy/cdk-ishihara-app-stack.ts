@@ -20,12 +20,8 @@ export class CdkIshiharaAppStack extends Stack {
 
 const app = new cdk.App();
 
-if (!process.env.QUALIFIER) {
-  process.env.QUALIFIER = "stage";
-}
-
-new CdkIshiharaAppStack(app, `CdkIshiharaAppStackRafa${capitalize(getNamespace())}`, {
+new CdkIshiharaAppStack(app, `CdkIshiharaAppStack${capitalize(getNamespace())}`, {
   synthesizer: new cdk.DefaultStackSynthesizer({
-    qualifier: process.env.QUALIFIER,
+    qualifier: process.env.QUALIFIER || 'local',
   }),
 });

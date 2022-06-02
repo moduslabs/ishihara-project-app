@@ -1,12 +1,12 @@
-name: Deployment master
+name: On Release published
 
 on:
-  push:
-    branches: [main]
+  release:
+    types: [published]
 
 env:
-  NAMESPACE: stage
-  QUALIFIER: stage
+  NAMESPACE: production
+  QUALIFIER: production
 
 jobs:
   deploy:
@@ -47,7 +47,7 @@ jobs:
         working-directory: deploy
 
       - name: Bootstrap stack
-        run: npm run cdk bootstrap -- --toolkit-stack-name CDKToolKitStage --qualifier ${{ env.QUALIFIER }}
+        run: npm run cdk bootstrap -- --toolkit-stack-name CDKToolKitProduction --qualifier ${{ env.QUALIFIER }}
         working-directory: deploy
 
       - name: Deploy stack

@@ -34,7 +34,7 @@ export function getWebappResources(stack: Construct, certificate: ICertificate):
   });
 
   const logBucket = new Bucket(stack, getResourceName('log-bucket'), {
-    bucketName: getResourceName('log-bucket'),
+    bucketName: getResourceName('ishihara-app-log-bucket'),
     blockPublicAccess: {
       blockPublicAcls: true,
       blockPublicPolicy: true,
