@@ -1,7 +1,0 @@
-{
-  "name": "ishihara-project-ios",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "custom"
-}

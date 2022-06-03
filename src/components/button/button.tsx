@@ -10,7 +10,7 @@ export class Button {
   @Prop() to?: string;
   @Prop() value: string | number;
   @Prop() expand?: 'block' | 'full';
-  @Prop() size?: 'large' | 'small' | 'default';
+  @Prop() size?: 'large' | 'small' | 'default' = 'default';
   @Prop() disabled?: boolean;
   @Prop() secondary?: boolean = false;
   @Prop() clickHandler: (e: MouseEvent) => void;
@@ -21,7 +21,7 @@ export class Button {
 
   render() {
     return (
-      <ion-button shape="round" size={this.size || 'default'} data-testid={this.dataTestId} expand={this.expand} disabled={this.disabled} onClick={this.clickHandler} {...this.props}>
+      <ion-button shape="round" size={this.size} data-testid={this.dataTestId} expand={this.expand} disabled={this.disabled} onClick={this.clickHandler} {...this.props}>
         {this.value}
       </ion-button>
     );
