@@ -3,7 +3,7 @@ import state from '../../store';
 import { capitalizePlateAnswer } from '../../helpers/utils';
 import routes from '../../helpers/routes';
 import { Plate } from '../../types/plate';
-import { toastController } from '@ionic/core';
+import { toastController, alertController } from '@ionic/core';
 import { SlideChangeDirection, SliderInputState } from '../../types/slider';
 
 @Component({
@@ -26,6 +26,7 @@ export class SliderPage {
   componentDidLoad() {
     this.slides = this.el.querySelector('ion-slides');
     this.slides.lockSwipeToNext(true);
+    this.infoAlert();
   }
 
   /**
@@ -131,6 +132,19 @@ export class SliderPage {
         position: 'bottom',
       })
     ).present();
+  }
+
+  /**
+   * Show an alert to inform the user that letters in the test are upper-case
+   */
+  async infoAlert() {
+    const alert = await alertController.create({
+      header: 'Important',
+      message: 'All the letters shown in this test are upper-case.',
+      buttons: ['Got it']
+    });
+
+    await alert.present();
   }
 
   /**
