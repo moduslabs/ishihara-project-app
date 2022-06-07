@@ -204,12 +204,12 @@ export class SliderPage {
                     {this.inputState.isDirty && !this.inputState.isValid ? <ion-label color="danger">Answer should be alphanumeric</ion-label> : null}
                   </ion-col>
                   <ion-col class="ion-margin-top">
-                    <app-button dataTestId={`skip-btn-${index}`} value="Skip" clickHandler={this.skip.bind(this, index)} expand="block"></app-button>
+                    <app-button size="large" dataTestId={`skip-btn-${index}`} value="Skip" clickHandler={this.skip.bind(this, index)} expand="block"></app-button>
                   </ion-col>
                 </ion-row>
                 <ion-row>
                   <ion-col>
-                    <app-button dataTestId={`prev-btn-${index}`} secondary value="Previous" disabled={index === 0} clickHandler={this.prev.bind(this)} expand="block" />
+                    <app-button size="large" dataTestId={`prev-btn-${index}`} secondary value="Previous" disabled={index === 0} clickHandler={this.prev.bind(this)} expand="block" />
                   </ion-col>
                   <ion-col>
                     <app-button
@@ -217,6 +217,7 @@ export class SliderPage {
                       value={index + 1 === this.plates.length ? 'Finish' : 'Next'}
                       clickHandler={this.next.bind(this, index)}
                       expand="block"
+                      size="large"
                       disabled={!this.inputState.isValid || !this.plates[index].answer}
                     />
                   </ion-col>

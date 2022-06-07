@@ -12,6 +12,7 @@ export namespace Components {
         "disabled"?: boolean;
         "expand"?: 'block' | 'full';
         "secondary"?: boolean;
+        "size"?: 'large' | 'small' | 'default';
         "to"?: string;
         "value": string | number;
     }
@@ -80,6 +81,7 @@ declare namespace LocalJSX {
         "disabled"?: boolean;
         "expand"?: 'block' | 'full';
         "secondary"?: boolean;
+        "size"?: 'large' | 'small' | 'default';
         "to"?: string;
         "value"?: string | number;
     }
