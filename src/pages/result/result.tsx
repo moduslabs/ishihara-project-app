@@ -49,9 +49,9 @@ export class ResultPage {
     return (
       <app-layout>
         <div class="ion-padding">
-          <h2>Color Deficiency Test Report</h2>
+          <h2>Final Report</h2>
           <div class="result">
-            <h3>Test result</h3>
+            <h3>Challenge Result</h3>
             <p data-testid="percentage">
               {this.correctPlates.length}/{state.plates.length} ({this.scorePercentage}%)
             </p>

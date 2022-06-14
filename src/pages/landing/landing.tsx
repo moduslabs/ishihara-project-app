@@ -18,13 +18,13 @@ export class LandingPage {
     return (
       <app-layout hasBack={false}>
         <div class="ion-padding">
-          <h2 data-testid="landing-page-title">Ishihara Color Blindness Test</h2>
+          <h2 data-testid="landing-page-title">Ishihara Plates Challenge</h2>
           <div class="container">
             <img data-testid="landing-page-image" src="/assets/images/cover-isihara.png" alt="Ishihara" />
           </div>
-          <h3 data-testid="landing-page-caption">Optometry Color Deficiency Test</h3>
+          <h3 data-testid="landing-page-caption">Challenge</h3>
           <p data-testid="landing-page-text">
-            The Ishihara test is a color perception test for color deficiencies, the first in a class of successful color vision tests called pseudo-isochromatic plates
+          Ishihara is an experimental app and not a substitute for medical diagnosis, advice, or treatment.
           </p>
           <app-button
             dataTestId="landing-page-btn"

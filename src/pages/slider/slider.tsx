@@ -172,7 +172,7 @@ export class SliderPage {
     return (
       <app-layout>
         <div class="ion-padding">
-          <h2>Color Deficiency Test</h2>
+          <h2>Ishihara Plates Challenge</h2>
           <ion-slides
             options={this.slideOpts}
             onIonSlideNextStart={this.handleSlideChange.bind(this, SlideChangeDirection.Next)}
