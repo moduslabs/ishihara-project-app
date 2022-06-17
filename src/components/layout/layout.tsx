@@ -1,4 +1,5 @@
-import { h, Component, Prop } from '@stencil/core';
+import { h, Component, Prop, State } from '@stencil/core';
+import { Keyboard } from '@capacitor/keyboard';
 import state from '../../store';
 
 @Component({
@@ -8,6 +9,17 @@ import state from '../../store';
 })
 export class Layout {
   @Prop() hasBack: boolean = true;
+  @State() shouldHide: boolean = false;
+
+  componentDidLoad() {
+    Keyboard.addListener('keyboardWillShow', () => {
+      this.shouldHide = true;
+    });
+    
+    Keyboard.addListener('keyboardDidHide', () => {
+      this.shouldHide = false;
+    });
+  }
 
   render() {
     return [
@@ -28,7 +40,7 @@ export class Layout {
       <ion-content>
         <slot />
       </ion-content>,
-      <ion-footer>
+      <ion-footer class={this.shouldHide ? 'hide' : ''}>
         <img src="/assets/images/modus-logo.svg" alt="Modus Create Logo" />
       </ion-footer>,
     ];

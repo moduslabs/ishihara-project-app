@@ -28,6 +28,10 @@ ion-footer {
   height: 64px;
 }
 
+.hide {
+  display: none;
+}
+
 ion-footer::before {
   display: none !important;
 }
