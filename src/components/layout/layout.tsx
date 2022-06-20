@@ -8,7 +8,7 @@ import state from '../../store';
 })
 export class Layout {
   @Prop() hasBack: boolean = true;
-  @Prop() shouldHide: boolean = false;
+  @Prop() shouldHideFooter: boolean = false;
 
   render() {
     return [
@@ -29,7 +29,7 @@ export class Layout {
       <ion-content>
         <slot />
       </ion-content>,
-      <ion-footer class={this.shouldHide ? 'hide' : ''}>
+      <ion-footer class={this.shouldHideFooter ? 'hide' : ''}>
         <img src="/assets/images/modus-logo.svg" alt="Modus Create Logo" />
       </ion-footer>,
     ];

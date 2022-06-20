@@ -17,7 +17,7 @@ export class SliderPage {
   @State() slides: HTMLIonSlidesElement;
   @State() slideIndex: number = 0;
   @State() plates: Plate[] = state.plates;
-  @State() shouldHide: boolean = false;
+  @State() shouldHideFooter: boolean = false;
   @State() inputState: SliderInputState = {
     isDirty: false,
     isValid: false,
@@ -31,11 +31,11 @@ export class SliderPage {
     this.infoAlert();
 
     Keyboard.addListener('keyboardWillShow', () => {
-      this.shouldHide = true;
+      this.shouldHideFooter = true;
     });
     
     Keyboard.addListener('keyboardDidHide', () => {
-      this.shouldHide = false;
+      this.shouldHideFooter = false;
     });
   }
 
@@ -198,7 +198,7 @@ export class SliderPage {
 
   render() {
     return (
-      <app-layout shouldHide={this.shouldHide}>
+      <app-layout shouldHideFooter={this.shouldHideFooter}>
         <div class="ion-padding">
           <h2>Color Deficiency Test</h2>
           <ion-slides
