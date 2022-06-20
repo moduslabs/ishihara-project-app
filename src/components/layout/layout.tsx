@@ -1,5 +1,4 @@
-import { h, Component, Prop, State } from '@stencil/core';
-import { Keyboard } from '@capacitor/keyboard';
+import { h, Component, Prop } from '@stencil/core';
 import state from '../../store';
 
 @Component({
@@ -9,17 +8,7 @@ import state from '../../store';
 })
 export class Layout {
   @Prop() hasBack: boolean = true;
-  @State() shouldHide: boolean = false;
-
-  componentDidLoad() {
-    Keyboard.addListener('keyboardWillShow', () => {
-      this.shouldHide = true;
-    });
-    
-    Keyboard.addListener('keyboardDidHide', () => {
-      this.shouldHide = false;
-    });
-  }
+  @Prop() shouldHide: boolean = false;
 
   render() {
     return [
