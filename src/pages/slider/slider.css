@@ -11,6 +11,8 @@
 
 .uppercase {
   text-transform: uppercase;
+  border: 1px solid var(--ion-color-darkGrey);
+  background: var(--ion-color-white);
 }
 
 .swiper-container .swiper-slide {
