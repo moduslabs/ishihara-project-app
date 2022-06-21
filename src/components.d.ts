@@ -20,6 +20,7 @@ export namespace Components {
     }
     interface AppLayout {
         "hasBack": boolean;
+        "shouldHideFooter": boolean;
     }
     interface AppResult {
     }
@@ -89,6 +90,7 @@ declare namespace LocalJSX {
     }
     interface AppLayout {
         "hasBack"?: boolean;
+        "shouldHideFooter"?: boolean;
     }
     interface AppResult {
     }

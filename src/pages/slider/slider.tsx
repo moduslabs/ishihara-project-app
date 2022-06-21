@@ -1,5 +1,6 @@
 import { Component, Element, h, State } from '@stencil/core';
 import state from '../../store';
+import { Keyboard } from '@capacitor/keyboard';
 import { capitalizePlateAnswer } from '../../helpers/utils';
 import routes from '../../helpers/routes';
 import { Plate } from '../../types/plate';
@@ -16,6 +17,7 @@ export class SliderPage {
   @State() slides: HTMLIonSlidesElement;
   @State() slideIndex: number = 0;
   @State() plates: Plate[] = state.plates;
+  @State() shouldHideFooter: boolean = false;
   @State() inputState: SliderInputState = {
     isDirty: false,
     isValid: false,
@@ -27,6 +29,18 @@ export class SliderPage {
     this.slides = this.el.querySelector('ion-slides');
     this.slides.lockSwipeToNext(true);
     this.infoAlert();
+
+    Keyboard.addListener('keyboardWillShow', () => {
+      this.shouldHideFooter = true;
+    });
+    
+    Keyboard.addListener('keyboardDidHide', () => {
+      this.shouldHideFooter = false;
+    });
+  }
+
+  disconnectedCallback() {
+    Keyboard.removeAllListeners();
   }
 
   /**
@@ -184,7 +198,7 @@ export class SliderPage {
 
   render() {
     return (
-      <app-layout>
+      <app-layout shouldHideFooter={this.shouldHideFooter}>
         <div class="ion-padding">
           <h2>Color Deficiency Test</h2>
           <ion-slides
