@@ -33,7 +33,7 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Install dependencies to deploy project
-        run: npm install
+        run: npm install --legacy-peer-deps
 
       - name: Build project
         run: npm run build
