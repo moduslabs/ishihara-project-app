@@ -5,8 +5,8 @@ on:
     branches: [appflow-cicd]
 
 jobs:
-  steps:
-    build:
+  build:
+    steps:
       - name: Build Android on Appflow
         uses: ionic-team/appflow-build@v1
         with:
