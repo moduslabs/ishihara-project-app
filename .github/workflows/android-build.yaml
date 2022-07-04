@@ -1,0 +1,17 @@
+name: Android build process
+
+on:
+  push:
+    branches: [appflow-cicd]
+
+jobs:
+  steps:
+    build:
+      - name: Build Android on Appflow
+        uses: ionic-team/appflow-build@v1
+        with:
+          token: ${{ secrets.APPFLOW_TOKEN }}
+          app-id: ${{ secrets.IONIC_APP_ID }}
+          platform: Android
+          build-type: debug
+          upload-artifact: Build-Android.zip
