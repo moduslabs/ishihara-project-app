@@ -20,8 +20,8 @@ log.txt
 node_modules/
 $RECYCLE.BIN/
 
-android/
-ios/
+# android/
+# ios/
 configure/configure.js
 
 .DS_Store
