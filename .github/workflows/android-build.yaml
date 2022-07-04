@@ -6,6 +6,8 @@ on:
 
 jobs:
   build:
+    name: Build
+    runs-on: ubuntu-latest
     steps:
       - name: Build Android on Appflow
         uses: ionic-team/appflow-build@v1
