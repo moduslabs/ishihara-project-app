@@ -12,6 +12,6 @@ describe('app-landing', () => {
       html: '<app-landing></app-landing>',
     });
     const pageTitle = await page.root.querySelector('[data-testid="landing-page-title"]').textContent
-    expect(pageTitle).toEqual('Ishihara Color Blindness Test');
+    expect(pageTitle).toEqual('Ishihara Plates Challenge');
   });
 });
