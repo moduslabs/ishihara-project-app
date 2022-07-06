@@ -20,6 +20,7 @@ jobs:
   build-ios:
     name: Build iOS
     runs-on: ubuntu-latest
+    steps:
       - name: Build iOS on Appflow
         uses: ionic-team/appflow-build@v1
         with:
