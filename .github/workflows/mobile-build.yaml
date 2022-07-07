@@ -57,7 +57,7 @@ jobs:
         run: npm install --legacy-peer-deps
 
       - name: Run Build
-        run npm run build
+        run: npm run build
 
       - name: Add iOS
         run: npx cap add ios
