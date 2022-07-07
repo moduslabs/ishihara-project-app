@@ -21,7 +21,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       
       - name: Add capacitor/android
-        run: npm install @capacitor/android
+        run: npm install @capacitor/android --legacy-peer-deps
 
       - name: Add android
         run: npx @capacitor/cli add android
@@ -50,7 +50,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Add capacitor/ios
-        run: npm install @capacitor/ios
+        run: npm install @capacitor/ios --legacy-peer-deps
 
       - name: Add iOS
         run: npx @capacitor/cli add ios
