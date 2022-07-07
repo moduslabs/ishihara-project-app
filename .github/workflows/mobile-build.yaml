@@ -19,9 +19,12 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
+      
+      - name: Add capacitor/android
+        run: npm install @capacitor/android
 
       - name: Add android
-        run: npx cap add android
+        run: npx @capacitor/cli add android
 
       - name: Build Android on Appflow
         uses: ionic-team/appflow-build@v1
@@ -46,8 +49,11 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Add android
-        run: npx cap add ios
+      - name: Add capacitor/ios
+        run: npm install @capacitor/ios
+
+      - name: Add iOS
+        run: npx @capacitor/cli add ios
 
       - name: Build iOS on Appflow
         uses: ionic-team/appflow-build@v1
