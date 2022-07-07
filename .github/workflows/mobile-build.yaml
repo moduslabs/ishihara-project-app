@@ -8,27 +8,7 @@ jobs:
   build-android:
     name: Build Android
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [16.x]
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-      
-      - name: Add capacitor/android
-        run: npm install --legacy-peer-deps
-
-      - name: Run build
-        run: npm run build
-      
-      - name: Add android
-        run: npx cap add android
-
       - name: Build Android on Appflow
         uses: ionic-team/appflow-build@v1
         with:
@@ -41,27 +21,7 @@ jobs:
   build-ios:
     name: Build iOS
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [16.x]
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-
-      - name: Add capacitor/ios
-        run: npm install --legacy-peer-deps
-
-      - name: Run Build
-        run: npm run build
-
-      - name: Add iOS
-        run: npx cap add ios
-
       - name: Build iOS on Appflow
         uses: ionic-team/appflow-build@v1
         with:
