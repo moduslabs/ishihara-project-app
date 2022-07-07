@@ -21,10 +21,13 @@ jobs:
           node-version: ${{ matrix.node-version }}
       
       - name: Add capacitor/android
-        run: npm install @capacitor/android --legacy-peer-deps
+        run: npm install --legacy-peer-deps
 
+      - name: Run build
+        run: npm run build
+      
       - name: Add android
-        run: npx @capacitor/cli add android
+        run: npx cap add android
 
       - name: Build Android on Appflow
         uses: ionic-team/appflow-build@v1
@@ -34,6 +37,7 @@ jobs:
           platform: Android
           build-type: debug
           upload-artifact: Build-Android.zip
+
   build-ios:
     name: Build iOS
     runs-on: ubuntu-latest
@@ -50,10 +54,13 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Add capacitor/ios
-        run: npm install @capacitor/ios --legacy-peer-deps
+        run: npm install --legacy-peer-deps
+
+      - name: Run Build
+        run npm run build
 
       - name: Add iOS
-        run: npx @capacitor/cli add ios
+        run: npx cap add ios
 
       - name: Build iOS on Appflow
         uses: ionic-team/appflow-build@v1
