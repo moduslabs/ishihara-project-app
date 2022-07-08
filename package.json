@@ -10,7 +10,7 @@
   "scripts": {
     "build": "stencil build",
     "postbuild": "npx cap add android && npx cap add ios && npm run configure-versions",
-    "configure-versions": "CI_BUILD_NUMBER=0.0.${CI_BUILD_NUMBER} npx cap-config run appflow.yml -y",
+    "configure-versions": "CI_BUILD_NUMBER=0.1.${CI_BUILD_NUMBER} npx cap-config run appflow.yml -y",
     "deploy": "stencil build && npx cap copy ios && npx cap sync",
     "start": "stencil build --dev --watch --serve",
     "test": "stencil test --spec --e2e",
