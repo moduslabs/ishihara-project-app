@@ -9,6 +9,7 @@
   ],
   "scripts": {
     "build": "stencil build",
+    "postbuild": "npx cap add android && npx cap add ios",
     "deploy": "stencil build && npx cap copy ios && npx cap sync",
     "start": "stencil build --dev --watch --serve",
     "test": "stencil test --spec --e2e",
