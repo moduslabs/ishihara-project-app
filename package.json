@@ -9,8 +9,7 @@
   ],
   "scripts": {
     "build": "stencil build",
-    "postbuild": "npx cap add android && npx cap add ios && npm run configure-versions",
-    "configure-versions": "npx cap-config run appflow.yml -y",
+    "appflow:build": "npx cap-config run appflow.yml -y && npm run build",
     "deploy": "stencil build && npx cap copy ios && npx cap sync",
     "start": "stencil build --dev --watch --serve",
     "test": "stencil test --spec --e2e",
