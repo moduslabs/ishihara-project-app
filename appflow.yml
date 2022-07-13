@@ -1,10 +1,14 @@
 vars:
   CI_BUILD_NUMBER:
     default: 1
+  CURRENT_VERSION_IOS:
+    default: 1.0.0
+  CURRENT_VERSION_ANDROID:
+    default: 1.0.0
 
 platforms:
   ios:
-    version: 0.1.2
+    version: $CURRENT_VERSION_IOS
     buildNumber: $CI_BUILD_NUMBER
   android:
     versionName: $CURRENT_VERSION_ANDROID
