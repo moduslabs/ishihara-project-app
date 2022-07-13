@@ -1,7 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
-    <string name="app_name">Ishihara</string>
-    <string name="title_activity_main">Ishihara</string>
-    <string name="package_name">com.modus.ishihara.app</string>
-    <string name="custom_url_scheme">com.modus.ishihara.app</string>
-</resources>
