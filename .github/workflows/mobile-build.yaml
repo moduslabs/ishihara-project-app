@@ -13,7 +13,7 @@ jobs:
         run: curl -fsSL https://ionic.io/get-ionic-cloud-cli | bash
 
       - name: Trigger build Android
-        run: ionic-cloud build android debug --app-id=${{ secrets.IONIC_APP_ID }} --commit=${{ github.sha }} --json
+        run: ionic-cloud build android debug --app-id=${{ secrets.IONIC_APP_ID }} --env CURRENT_VERSION_ANDROID=${{ secrets.CURRENT_VERSION_ANDROID }} --commit=${{ github.sha }} --json
         env:
           IONIC_TOKEN: ${{ secrets.IONIC_TOKEN }}
 
