@@ -11,12 +11,9 @@ jobs:
     steps:
       - name: Install Ionic-Cloud
         run: curl -fsSL https://ionic.io/get-ionic-cloud-cli | bash
-      
-      - name: Export Ionic token
-        run: export IONIC_TOKEN=${{ secrets.IONIC_TOKEN }}
 
       - name: Trigger build Android
-        run: ionic-cloud build android debug --app-id=${{ secrets.IONIC_APP_ID }} --commit=${{ github.sha }} --json
+        run: export IONIC_TOKEN=${{ secrets.IONIC_TOKEN }} | ionic-cloud build android debug --app-id=${{ secrets.IONIC_APP_ID }} --commit=${{ github.sha }} --json
 
   # build-ios:
   #   name: Build iOS
