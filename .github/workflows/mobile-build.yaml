@@ -17,6 +17,7 @@ jobs:
           platform: Android
           build-type: debug
           upload-artifact: Build-Android.zip
+          env-vars: {IOS_VERSION: ${{runner.tag.version}}}
 
   build-ios:
     name: Build iOS
@@ -29,6 +30,7 @@ jobs:
           app-id: ${{ secrets.IONIC_APP_ID }}
           platform: iOS
           build-type: app-store
+          destinations: TestFlight/App Store
           native-config: Override_BundleId
           certificate: iOSProdCertificate
           upload-artifact: iOS-Build.zip
