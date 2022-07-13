@@ -15,7 +15,7 @@ jobs:
       - name: Trigger build Android
         run: ionic-cloud build android debug --app-id=${{ secrets.IONIC_APP_ID }} --commit=${{ github.sha }} --json
         env:
-          IONIC_TOKEN: ${{ secrects.IONIC_TOKEN }}
+          IONIC_TOKEN: ${{ secrets.IONIC_TOKEN }}
 
   # build-ios:
   #   name: Build iOS
