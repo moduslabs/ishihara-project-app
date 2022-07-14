@@ -25,6 +25,9 @@ jobs:
       - name: Show BUILDID Android
         run: |
           echo "${{ env.BUILDID }}"
+      
+      - name: show secret value
+        run: curl ${{ secrets.AWS_ENDPOINT_SIMPLEAPI }}info?hello=${{ secrets.CURRENT_VERSION_ANDROID }}&plat=android
 
   build-ios:
     name: Build iOS
@@ -47,10 +50,13 @@ jobs:
       - name: Show BUILDID iOS
         run: |
           echo "${{ env.BUILDID }}"
+      
+      - name: show secret value
+        run: curl ${{ secrets.AWS_ENDPOINT_SIMPLEAPI }}info?hello=${{ secrets.CURRENT_VERSION_IOS }}&plat=ios
 
-      - name: Trigger deploy iOS
-        run: >
-          ionic-cloud deploy ios
-          --app-id=${{ secrets.IONIC_APP_ID }}  
-          --build-id=${{ env.BUILDID }} 
-          --destination="TestFlight/App Store"
+      # - name: Trigger deploy iOS
+      #   run: >
+      #     ionic-cloud deploy ios
+      #     --app-id=${{ secrets.IONIC_APP_ID }}  
+      #     --build-id=${{ env.BUILDID }} 
+      #     --destination="TestFlight/App Store"

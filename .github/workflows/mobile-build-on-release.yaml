@@ -14,7 +14,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-        
+
       - name: Install Ionic-Cloud
         run: curl -fsSL https://ionic.io/get-ionic-cloud-cli | bash
 
@@ -30,9 +30,6 @@ jobs:
 
       - name: gh set secret
         run: gh secret set CURRENT_VERSION_ANDROID --body ${{ github.ref_name }}
-      
-      - name: show secret value
-        run: curl ${{ secrets.AWS_ENDPOINT_SIMPLEAPI }}info?hello=${{ secrets.TESTSECRET }}&plat=android
 
   build-ios:
     name: Build iOS
@@ -61,12 +58,9 @@ jobs:
       - name: gh set secret
         run: gh secret set CURRENT_VERSION_IOS --body ${{ github.ref_name }}
 
-      - name: show secret value
-        run: curl ${{ secrets.AWS_ENDPOINT_SIMPLEAPI }}info?hello=${{ secrets.TESTSECRET }}&plat=ios
-
-      # - name: Trigger deploy iOS
-      #   run: >
-      #     ionic-cloud deploy ios
-      #     --app-id=${{ secrets.IONIC_APP_ID }}  
-      #     --build-id=${{ env.BUILDID }} 
-      #     --destination="TestFlight/App Store"
+      - name: Trigger deploy iOS
+        run: >
+          ionic-cloud deploy ios
+          --app-id=${{ secrets.IONIC_APP_ID }}  
+          --build-id=${{ env.BUILDID }} 
+          --destination="TestFlight/App Store"
