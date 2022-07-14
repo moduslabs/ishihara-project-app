@@ -12,6 +12,9 @@ jobs:
     name: Build Android
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        
       - name: Install Ionic-Cloud
         run: curl -fsSL https://ionic.io/get-ionic-cloud-cli | bash
 
@@ -35,6 +38,9 @@ jobs:
     name: Build iOS
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
       - name: Install Ionic-Cloud
         run: curl -fsSL https://ionic.io/get-ionic-cloud-cli | bash
 
@@ -58,9 +64,9 @@ jobs:
       - name: show secret value
         run: curl ${{ secrets.AWS_ENDPOINT_SIMPLEAPI }}info?hello=${{ secrets.TESTSECRET }}&plat=ios
 
-      - name: Trigger deploy iOS
-        run: >
-          ionic-cloud deploy ios
-          --app-id=${{ secrets.IONIC_APP_ID }}  
-          --build-id=${{ env.BUILDID }} 
-          --destination="TestFlight/App Store"
+      # - name: Trigger deploy iOS
+      #   run: >
+      #     ionic-cloud deploy ios
+      #     --app-id=${{ secrets.IONIC_APP_ID }}  
+      #     --build-id=${{ env.BUILDID }} 
+      #     --destination="TestFlight/App Store"
