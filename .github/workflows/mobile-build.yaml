@@ -4,6 +4,9 @@ on:
   push:
     branches: [appflow-cicd]
 
+env:
+  IONIC_TOKEN: ${{ secrets.IONIC_TOKEN }}
+
 jobs:
   build-android:
     name: Build Android
@@ -18,8 +21,6 @@ jobs:
             --app-id=${{ secrets.IONIC_APP_ID }} 
             --env CURRENT_VERSION_ANDROID=${{ secrets.CURRENT_VERSION_ANDROID }} 
             --commit=${{ github.sha }} --json | jq -r '.buildId') >> $GITHUB_ENV
-        env:
-          IONIC_TOKEN: ${{ secrets.IONIC_TOKEN }}
 
       - name: Show BUILDID Android
         run: |
