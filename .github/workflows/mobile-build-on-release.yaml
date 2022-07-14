@@ -1,8 +1,8 @@
 name: Release build/deploy native apps
 
 on:
-  push:
-    branches: [appflow-cicd]
+  release:
+    types: [published]
 
 env:
   IONIC_TOKEN: ${{ secrets.IONIC_TOKEN }}
