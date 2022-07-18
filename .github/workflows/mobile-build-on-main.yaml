@@ -23,11 +23,11 @@ jobs:
             --commit=${{ github.sha }} --apk --apk-name=ishihara-latest.apk --json | jq -r '.buildId') >> $GITHUB_ENV
       
       - name: Send APK to Ishihara Group
-        run: |
-          curl https://slack.com/api/files.upload -F file=@ishihara-latest.apk  \
-          -F "initial_comment=Latest apk version" \
-          -F channels=C03NXEKPQGH \
-          -H "Authorization: Bearer ${{ secrets.SLACK_BOT_TOKEN }}"
+        run: >
+          curl https://slack.com/api/files.upload -F file=@ishihara-latest.apk
+          -F "initial_comment=Latest apk version"
+          -F channels=C03NXEKPQGH
+          -H "Authorization: Bearer ${{ secrets.SLACK_BOT_TOKEN_TEST_DELETE }}"
 
       # - name: Trigger deploy Google Play Console
       #   run: >
