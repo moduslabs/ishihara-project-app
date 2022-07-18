@@ -24,10 +24,10 @@ jobs:
       
       - name: Send APK to Ishihara Group
         run: >
-          curl -F file=@ishihara-latest.apk 
+          curl https://slack.com/api/files.upload -F file=@ishihara-latest.apk 
             -F "initial_comment=Latest apk version" 
             -F channels=C03NXEKPQGH 
-            -H "Authorization: Bearer ${{ secrets.SLACK_BOT_TOKEN }}" https://slack.com/api/files.upload
+            -H "Authorization: Bearer ${{ secrets.SLACK_BOT_TOKEN }}"
 
       # - name: Trigger deploy Google Play Console
       #   run: >
