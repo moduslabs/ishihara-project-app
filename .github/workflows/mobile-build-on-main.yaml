@@ -1,4 +1,4 @@
-name: Android build process
+name: Platform build process
 
 on:
   push:
@@ -20,43 +20,34 @@ jobs:
             echo BUILDID=$(ionic-cloud build android debug 
             --app-id=${{ secrets.IONIC_APP_ID }} 
             --env CURRENT_VERSION_ANDROID=${{ secrets.CURRENT_VERSION_ANDROID }} 
-            --commit=${{ github.sha }} --json | jq -r '.buildId') >> $GITHUB_ENV
+            --commit=${{ github.sha }} --apk --apk-name=ishihara-latest.apk --json | jq -r '.buildId') >> $GITHUB_ENV
 
-      - name: Show BUILDID Android
-        run: |
-          echo "${{ env.BUILDID }}"
-      
-      - name: show secret value
-        run: curl ${{ secrets.AWS_ENDPOINT_SIMPLEAPI }}info?hello=${{ secrets.CURRENT_VERSION_ANDROID }}&plat=android
-
-  build-ios:
-    name: Build iOS
-    runs-on: ubuntu-latest
-    steps:
-      - name: Install Ionic-Cloud
-        run: curl -fsSL https://ionic.io/get-ionic-cloud-cli | bash
-
-      - name: Trigger build iOS
-        run: >
-            echo BUILDID=$(ionic-cloud build ios app-store
-            --app-id=${{ secrets.IONIC_APP_ID }} 
-            --native-config=Override_BundleId
-            --signing-cert=iOSProdCertificate
-            --env CURRENT_VERSION_IOS=${{ secrets.CURRENT_VERSION_IOS }} 
-            --commit=${{ github.sha }} --json | jq -r '.buildId') >> $GITHUB_ENV
-        env:
-          IONIC_TOKEN: ${{ secrets.IONIC_TOKEN }}
-
-      - name: Show BUILDID iOS
-        run: |
-          echo "${{ env.BUILDID }}"
-      
-      - name: show secret value
-        run: curl ${{ secrets.AWS_ENDPOINT_SIMPLEAPI }}info?hello=${{ secrets.CURRENT_VERSION_IOS }}&plat=ios
-
-      # - name: Trigger deploy iOS
+      # - name: Trigger deploy Google Play Console
       #   run: >
-      #     ionic-cloud deploy ios
+      #     ionic-cloud deploy android
       #     --app-id=${{ secrets.IONIC_APP_ID }}  
       #     --build-id=${{ env.BUILDID }} 
       #     --destination="TestFlight/App Store"
+
+  # build-ios:
+  #   name: Build iOS
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Install Ionic-Cloud
+  #       run: curl -fsSL https://ionic.io/get-ionic-cloud-cli | bash
+
+  #     - name: Trigger build iOS
+  #       run: >
+  #           echo BUILDID=$(ionic-cloud build ios app-store
+  #           --app-id=${{ secrets.IONIC_APP_ID }} 
+  #           --native-config=Override_BundleId
+  #           --signing-cert=iOSProdCertificate
+  #           --env CURRENT_VERSION_IOS=${{ secrets.CURRENT_VERSION_IOS }} 
+  #           --commit=${{ github.sha }} --json | jq -r '.buildId') >> $GITHUB_ENV
+
+  #     - name: Trigger deploy iOS
+  #       run: >
+  #         ionic-cloud deploy ios
+  #         --app-id=${{ secrets.IONIC_APP_ID }}  
+  #         --build-id=${{ env.BUILDID }} 
+  #         --destination="TestFlight/App Store"
