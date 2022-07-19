@@ -17,8 +17,9 @@ jobs:
 
       - name: Trigger build Android
         run: >
-            echo BUILDID=$(ionic-cloud build android debug 
+            echo BUILDID=$(ionic-cloud build android release 
             --app-id=${{ secrets.IONIC_APP_ID }} 
+            --signing-cert=AndroidProdCertificate
             --env CURRENT_VERSION_ANDROID=${{ secrets.CURRENT_VERSION_ANDROID }} 
             --commit=${{ github.sha }} --apk --apk-name=ishihara-latest.apk --json | jq -r '.buildId') >> $GITHUB_ENV
       
