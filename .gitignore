@@ -1,6 +1,10 @@
 dist/
 !www/favicon.ico
 www/
+resources/android/icon
+resources/android/splash
+resources/ios
+resources/windows
 
 *~
 *.sw[mnpcod]
