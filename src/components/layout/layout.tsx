@@ -1,5 +1,4 @@
-import { h, Component, Prop } from '@stencil/core';
-import state from '../../store';
+import { h, Component, Prop, Event, EventEmitter, State, Listen } from '@stencil/core';
 
 @Component({
   tag: 'app-layout',
@@ -9,14 +8,40 @@ import state from '../../store';
 export class Layout {
   @Prop() hasBack: boolean = true;
   @Prop() shouldHideFooter: boolean = false;
+  @State() slideIndex: number;
+  @Event() navBackAction: EventEmitter;
+  private router: HTMLIonRouterElement = document.querySelector('ion-router');
+
+
+  /**
+   * Update the slideIndex property with the value obtained from event emmitted
+   */
+  @Listen('currentSlideIndex', {target: 'document'})
+   updateSlideIndex(event: CustomEvent<number>) {
+    this.slideIndex = event.detail;
+  }
+
+  /**
+   * handle the tap of the toolbar's back button
+   */
+  backButtonAction = () => {
+    if(this.slideIndex && this.slideIndex > 0) {
+      this.navBackAction.emit();
+    } else {
+      this.router.push('/', 'back');
+    }
+  }
+
 
   render() {
     return [
       <ion-header>
         <ion-toolbar color="primary">
           {this.hasBack ? (
-            <ion-buttons slot="start">
-              <ion-back-button defaultHref={state.history[0]?.previous ?? '/'}></ion-back-button>
+            <ion-buttons slot="start" onClick={this.backButtonAction}>
+              <ion-button>
+                <ion-icon name="arrow-back-outline" slot="icon-only"></ion-icon>
+              </ion-button>
             </ion-buttons>
           ) : null}
           <ion-title>
