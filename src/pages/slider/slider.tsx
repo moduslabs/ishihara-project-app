@@ -1,4 +1,4 @@
-import { Component, Element, h, State } from '@stencil/core';
+import { Component, Element, h, State, Listen, Event, EventEmitter } from '@stencil/core';
 import state from '../../store';
 import { Keyboard } from '@capacitor/keyboard';
 import { capitalizePlateAnswer } from '../../helpers/utils';
@@ -18,6 +18,7 @@ export class SliderPage {
   @State() slideIndex: number = 0;
   @State() plates: Plate[] = state.plates;
   @State() shouldHideFooter: boolean = false;
+  @Event() currentSlideIndex: EventEmitter<number>;
   @State() inputState: SliderInputState = {
     isDirty: false,
     isValid: false,
@@ -29,6 +30,7 @@ export class SliderPage {
     this.slides = this.el.querySelector('ion-slides');
     this.slides.lockSwipeToNext(true);
     this.infoAlert();
+    this.emmitSlideIndex();
 
     Keyboard.addListener('keyboardWillShow', () => {
       this.shouldHideFooter = true;
@@ -41,6 +43,21 @@ export class SliderPage {
 
   disconnectedCallback() {
     Keyboard.removeAllListeners();
+  }
+  
+  /**
+   * Call the prev method when the navBackAction event is emmitted
+   */
+  @Listen('navBackAction')
+  async actBack() {
+    await this.prev();
+  }
+
+  /**
+   * Emmit the latest value of slideIndex
+   */
+  emmitSlideIndex = () => {
+    this.currentSlideIndex.emit(this.slideIndex);
   }
 
   /**
@@ -125,6 +142,8 @@ export class SliderPage {
       default:
         throw new Error(`Unknown slide change type: ${changeDirection}`);
     }
+
+    this.emmitSlideIndex();
 
     // Update input state and enable/disable swiping to the next slide
     this.inputState = {
