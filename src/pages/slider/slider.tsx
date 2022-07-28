@@ -35,7 +35,7 @@ export class SliderPage {
     Keyboard.addListener('keyboardWillShow', () => {
       this.shouldHideFooter = true;
     });
-    
+
     Keyboard.addListener('keyboardDidHide', () => {
       this.shouldHideFooter = false;
     });
@@ -44,7 +44,7 @@ export class SliderPage {
   disconnectedCallback() {
     Keyboard.removeAllListeners();
   }
-  
+
   /**
    * Call the prev method when the navBackAction event is emmitted
    */
@@ -92,11 +92,11 @@ export class SliderPage {
     // Enable swiping to the next slide - if an answer was entered
     this.slides.lockSwipeToNext(!this.inputState.isValid || !inputEl.value);
   }
-  
+
   /**
    * Swipe over the current slide
    *
-   * This is called when the user press the Enter key 
+   * This is called when the user press the Enter key
    * @param e - Input event
    * @param index - Index of the plate
    */
@@ -204,6 +204,7 @@ export class SliderPage {
     if (isLastSlide) {
       this.router.push(routes.result.url, 'root');
     } else {
+      (document.activeElement as HTMLElement).blur();
       this.slides.slideNext();
     }
   }
