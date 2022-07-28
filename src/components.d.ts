@@ -29,6 +29,14 @@ export namespace Components {
     interface AppSlider {
     }
 }
+export interface AppLayoutCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLAppLayoutElement;
+}
+export interface AppSliderCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLAppSliderElement;
+}
 declare global {
     interface HTMLAppButtonElement extends Components.AppButton, HTMLStencilElement {
     }
@@ -90,6 +98,7 @@ declare namespace LocalJSX {
     }
     interface AppLayout {
         "hasBack"?: boolean;
+        "onNavBackAction"?: (event: AppLayoutCustomEvent<any>) => void;
         "shouldHideFooter"?: boolean;
     }
     interface AppResult {
@@ -97,6 +106,7 @@ declare namespace LocalJSX {
     interface AppRoot {
     }
     interface AppSlider {
+        "onCurrentSlideIndex"?: (event: AppSliderCustomEvent<number>) => void;
     }
     interface IntrinsicElements {
         "app-button": AppButton;
