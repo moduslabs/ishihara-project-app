@@ -44,6 +44,21 @@ export class SliderPage {
   disconnectedCallback() {
     Keyboard.removeAllListeners();
   }
+  
+  /**
+   * Call the prev method when the navBackAction event is emmitted
+   */
+  @Listen('navBackAction')
+  async actBack() {
+    await this.prev();
+  }
+
+  /**
+   * Emmit the latest value of slideIndex
+   */
+  emmitSlideIndex = () => {
+    this.currentSlideIndex.emit(this.slideIndex);
+  }
 
   /**
    * Call the prev method when the navBackAction event is emmitted
