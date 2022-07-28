@@ -204,6 +204,7 @@ export class SliderPage {
     if (isLastSlide) {
       this.router.push(routes.result.url, 'root');
     } else {
+      (document.activeElement as HTMLElement).blur();
       this.slides.slideNext();
     }
   }
