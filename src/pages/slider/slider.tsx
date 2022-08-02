@@ -227,9 +227,17 @@ export class SliderPage {
    * Set focus to input of the current slide
    */
   focusInputOnSlideChange() {
-    (document.getElementById(`plate-${this.slideIndex}`).firstChild as HTMLElement).focus();
+    (document.getElementById(`plate-${this.slideIndex}`).firstChild as HTMLIonInputElement).focus();
   }
 
+  /**
+   * Due some problems with real devices on "next/go/enter" keyboard,
+   * where the keydown wasn't being triggered when the enterkey was with "next"
+   * value (default while there're next slides), the property "enterkeyhint"
+   * was passed with the "go" value. So when the users pass to the next plates using
+   * the enter keyboard, the event is listened and all synchronization about the 
+   * slideIndex is made
+   */
   render() {
     return (
       <app-layout shouldHideFooter={this.shouldHideFooter}>
@@ -256,6 +264,7 @@ export class SliderPage {
                     <ion-input
                       data-testid="user-input"
                       class="uppercase"
+                      enterkeyhint="go"
                       id={`plate-${index}`}
                       autocapitalize="capitalize"
                       value={plate.answer}
