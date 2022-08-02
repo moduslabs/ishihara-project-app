@@ -58,7 +58,7 @@ export class SliderPage {
    */
   emmitSlideIndex = () => {
     this.currentSlideIndex.emit(this.slideIndex);
-  }
+  };
 
   /**
    * Handle input from the user
@@ -102,7 +102,7 @@ export class SliderPage {
    */
   handleKeyDown(e: KeyboardEvent, index: number) {
     // Enable swiping to the next slide by pressing the keyboard enter key
-    if(e.key === "Enter") {
+    if (e.key === 'Enter') {
       this.next(index);
     }
   }
@@ -174,7 +174,15 @@ export class SliderPage {
     const alert = await alertController.create({
       header: 'Important',
       message: 'All the letters shown in this test are upper-case.',
-      buttons: ['Got it']
+      buttons: [
+        {
+          text: 'Got it',
+          handler: () => {
+            let transition = alert.dismiss();
+            transition.then(() => this.focusInputOnSlideChange());
+          },
+        },
+      ],
     });
 
     await alert.present();
@@ -204,7 +212,6 @@ export class SliderPage {
     if (isLastSlide) {
       this.router.push(routes.result.url, 'root');
     } else {
-      (document.activeElement as HTMLElement).blur();
       this.slides.slideNext();
     }
   }
@@ -216,6 +223,13 @@ export class SliderPage {
     this.slides.slidePrev();
   }
 
+  /**
+   * Set focus to input of the current slide
+   */
+  focusInputOnSlideChange() {
+    (document.getElementById(`plate-${this.slideIndex}`).firstChild as HTMLElement).focus();
+  }
+
   render() {
     return (
       <app-layout shouldHideFooter={this.shouldHideFooter}>
@@ -224,6 +238,8 @@ export class SliderPage {
           <ion-slides
             options={this.slideOpts}
             onIonSlideNextStart={this.handleSlideChange.bind(this, SlideChangeDirection.Next)}
+            onIonSlideNextEnd={this.focusInputOnSlideChange.bind(this)}
+            onIonSlidePrevEnd={this.focusInputOnSlideChange.bind(this)}
             onIonSlidePrevStart={this.handleSlideChange.bind(this, SlideChangeDirection.Previous)}
           >
             {this.plates?.map((plate, index) => (
@@ -240,7 +256,7 @@ export class SliderPage {
                     <ion-input
                       data-testid="user-input"
                       class="uppercase"
-                      autofocus
+                      id={`plate-${index}`}
                       autocapitalize="capitalize"
                       value={plate.answer}
                       debounce={300}
@@ -257,7 +273,15 @@ export class SliderPage {
                 </ion-row>
                 <ion-row>
                   <ion-col>
-                    <app-button size="large" dataTestId={`prev-btn-${index}`} secondary value="Previous" disabled={index === 0} clickHandler={this.prev.bind(this)} expand="block" />
+                    <app-button
+                      size="large"
+                      dataTestId={`prev-btn-${index}`}
+                      secondary
+                      value="Previous"
+                      disabled={index === 0}
+                      clickHandler={this.prev.bind(this)}
+                      expand="block"
+                    />
                   </ion-col>
                   <ion-col>
                     <app-button
