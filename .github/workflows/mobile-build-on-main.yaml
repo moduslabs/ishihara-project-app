@@ -30,13 +30,6 @@ jobs:
           -F channels=${{ secrets.SLACK_CHANNEL_ID }}
           -H "Authorization: Bearer ${{ secrets.SLACK_BOT_TOKEN }}"
 
-      # - name: Trigger deploy Google Play Console
-      #   run: >
-      #     ionic-cloud deploy android
-      #     --app-id=${{ secrets.IONIC_APP_ID }}  
-      #     --build-id=${{ env.BUILDID }} 
-      #     --destination="TestFlight/App Store"
-
   build-ios:
     name: Build iOS
     runs-on: ubuntu-latest
