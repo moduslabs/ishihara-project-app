@@ -1,8 +1,8 @@
-name: Platform build process
+name: Main build/deploy native apps
 
 on:
   push:
-    branches: [appflow-cicd]
+    branches: [main]
 
 env:
   IONIC_TOKEN: ${{ secrets.IONIC_TOKEN }}
