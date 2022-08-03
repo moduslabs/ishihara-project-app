@@ -1,0 +1,54 @@
+name: Main build/deploy native apps
+
+on:
+  push:
+    branches: [main]
+
+env:
+  IONIC_TOKEN: ${{ secrets.IONIC_TOKEN }}
+
+jobs:
+  build-android:
+    name: Build Android
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Ionic-Cloud
+        run: curl -fsSL https://ionic.io/get-ionic-cloud-cli | bash
+
+      - name: Trigger build Android
+        run: >
+            echo BUILDID=$(ionic-cloud build android release 
+            --app-id=${{ secrets.IONIC_APP_ID }} 
+            --signing-cert=AndroidProdCertificate
+            --env CURRENT_VERSION_ANDROID=${{ secrets.CURRENT_VERSION_ANDROID }} 
+            --commit=${{ github.sha }} --apk --apk-name=ishihara-latest.apk --json | jq -r '.buildId') >> $GITHUB_ENV
+      
+      - name: Send APK to Ishihara Group
+        run: >
+          curl https://slack.com/api/files.upload -F file=@ishihara-latest.apk
+          -F "initial_comment=Latest apk version"
+          -F channels=${{ secrets.SLACK_CHANNEL_ID }}
+          -H "Authorization: Bearer ${{ secrets.SLACK_BOT_TOKEN }}"
+
+  build-ios:
+    name: Build iOS
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Ionic-Cloud
+        run: curl -fsSL https://ionic.io/get-ionic-cloud-cli | bash
+
+      - name: Trigger build iOS
+        run: >
+            echo BUILDID=$(ionic-cloud build ios app-store
+            --app-id=${{ secrets.IONIC_APP_ID }} 
+            --native-config=Override_BundleId
+            --signing-cert=iOSProdCertificate
+            --env CURRENT_VERSION_IOS=${{ secrets.CURRENT_VERSION_IOS }} 
+            --commit=${{ github.sha }} --json | jq -r '.buildId') >> $GITHUB_ENV
+
+      - name: Trigger deploy iOS
+        run: >
+          ionic-cloud deploy ios
+          --app-id=${{ secrets.IONIC_APP_ID }}  
+          --build-id=${{ env.BUILDID }} 
+          --destination="TestFlight/App Store"

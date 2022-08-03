@@ -1,0 +1,66 @@
+name: Release build/deploy native apps
+
+on:
+  release:
+    types: [published]
+
+env:
+  IONIC_TOKEN: ${{ secrets.IONIC_TOKEN }}
+
+jobs:
+  build-android:
+    name: Build Android
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install Ionic-Cloud
+        run: curl -fsSL https://ionic.io/get-ionic-cloud-cli | bash
+
+      - name: Trigger build Android
+        run: >
+            echo BUILDID=$(ionic-cloud build android debug 
+            --app-id=${{ secrets.IONIC_APP_ID }} 
+            --env CURRENT_VERSION_ANDROID=${{ secrets.CURRENT_VERSION_ANDROID }} 
+            --commit=${{ github.sha }} --json | jq -r '.buildId') >> $GITHUB_ENV
+
+      - name:
+        run: gh auth login --with-token <<< ${{ secrets.TOKEN_UPDATE_SECRET }}
+
+      - name: gh set secret
+        run: gh secret set CURRENT_VERSION_ANDROID --body ${{ github.ref_name }}
+
+  build-ios:
+    name: Build iOS
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install Ionic-Cloud
+        run: curl -fsSL https://ionic.io/get-ionic-cloud-cli | bash
+
+      - name: Trigger build iOS
+        run: >
+            echo BUILDID=$(ionic-cloud build ios app-store
+            --app-id=${{ secrets.IONIC_APP_ID }} 
+            --native-config=Override_BundleId
+            --signing-cert=iOSProdCertificate
+            --env CURRENT_VERSION_IOS=${{ secrets.CURRENT_VERSION_IOS }} 
+            --commit=${{ github.sha }} --json | jq -r '.buildId') >> $GITHUB_ENV
+        env:
+          IONIC_TOKEN: ${{ secrets.IONIC_TOKEN }}
+
+      - name:
+        run: gh auth login --with-token <<< ${{ secrets.TOKEN_UPDATE_SECRET }}
+
+      - name: gh set secret
+        run: gh secret set CURRENT_VERSION_IOS --body ${{ github.ref_name }}
+
+      - name: Trigger deploy iOS
+        run: >
+          ionic-cloud deploy ios
+          --app-id=${{ secrets.IONIC_APP_ID }}  
+          --build-id=${{ env.BUILDID }} 
+          --destination="TestFlight/App Store"

@@ -24,7 +24,6 @@ log.txt
 node_modules/
 $RECYCLE.BIN/
 
-
 configure/configure.js
 
 .DS_Store

@@ -9,23 +9,25 @@
   ],
   "scripts": {
     "build": "stencil build",
+    "appflow:build": "npx cap-config run appflow.yml -y && npm run build",
     "deploy": "stencil build && npx cap copy ios && npx cap sync",
     "start": "stencil build --dev --watch --serve",
     "test": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watch",
     "generate": "stencil generate",
-    "configure": "npx typescript configure/configure.ts && node configure/configure.js"
+    "configure": "npx tsc configure/configure.ts && node configure/configure.js"
   },
   "devDependencies": {
     "@capacitor/cli": "^3.4.1",
+    "@capacitor/configure": "^1.0.28",
+    "@ionic-native/core": "^5.36.0",
     "@ionic/core": "^5.3.2",
     "@stencil/core": "^2.13.0",
     "@types/jest": "^27.0.3",
     "jest": "^27.4.5",
     "jest-cli": "^27.4.5",
     "puppeteer": "^10.0.0",
-    "rxjs": "^7.5.5",
-    "@ionic-native/core": "^5.36.0"
+    "rxjs": "^7.5.5"
   },
   "dependencies": {
     "@capacitor/android": "^3.4.1",
