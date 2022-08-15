@@ -23,7 +23,7 @@ jobs:
             echo BUILDID=$(ionic-cloud build android release 
             --app-id=${{ secrets.IONIC_APP_ID }} 
             --signing-cert=AndroidProdCertificate
-            --env CURRENT_VERSION_ANDROID=${{ secrets.CURRENT_VERSION_ANDROID }}
+            --env CURRENT_VERSION_ANDROID=${{ github.ref_name }}
             --commit=${{ github.sha }} --apk --apk-name=ishihara-latest.apk --json | jq -r '.buildId') >> $GITHUB_ENV
 
       - name:
@@ -55,7 +55,7 @@ jobs:
             --app-id=${{ secrets.IONIC_APP_ID }} 
             --native-config=Override_BundleId
             --signing-cert=iOSProdCertificate
-            --env CURRENT_VERSION_IOS=${{ secrets.CURRENT_VERSION_IOS }} 
+            --env CURRENT_VERSION_IOS=${{ github.ref_name }} 
             --commit=${{ github.sha }} --json | jq -r '.buildId') >> $GITHUB_ENV
         env:
           IONIC_TOKEN: ${{ secrets.IONIC_TOKEN }}

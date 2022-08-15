@@ -53,87 +53,29 @@ To run the unit tests and watch for file changes during development, run:
 npm run test.watch
 ```
 
+## Deployment for test
+
+To generate a new version for test for both platforms (iOS and Android), you will just push or merge the changes into the main branch. As you have a new change on the main, a workflow will start to build and deploy the apps on Google Play Console under the "Internal" track and on TestFlight in the Apple Store Connect.
+Once the apps was deployed into the stores, there are some differents steps between them to make the app available for testers.
+
+For iOS, you will need to assign the new for a tester lists which will receive an email to update the TestFlight version.
+For Android, you just need do it for the initial configuration, where you should define the tester groups for the desired track, in our case the "Internal".
+
+
 ## Deployment to distribution platforms 
 
-### Submitting to the iOS App store:
+To update the app, you should create a new release with the desired version, this version will be used as the version name for the iOS and Android version.
 
-Requirements
+For every release published, will be executed github actions triggering the AppFlow build and deploy process.
+For the iOS, the new version will be release under TestFlight and for Android the track "Internal" will be used.
 
-* Xcode
-* Apple Developers account
-* A valid provisioning profile
-* App Development and Distribution certificates
+To promote for production on Apple Store Connect, you need create a new version in the production using the recently deployed version addint the release notes and other required infos.
+To promote a android version, you can use the promote option from "Internal" track to "Production" also adding the release notes and other required infos.
 
-if plaform is not added, be sure to add it 
+After this process, both versions will be analyzed for the stores to be deployed into the public.
 
-```bash
- npx capacitor add ios
-```
-
-```bash
- npx capacitor run ios
-```
-
-## Generating Signing Certificates
-
-To create the certificates and profiles needed, contact the IOS department or visit [Apple's member center](https://help.apple.com/xcode/mac/current/#/dev3a05256b8)  and follow the links described in Apple's documentation.
-
-There are two types of certificates that matter here, Development, and Distribution. Development Certificates are just that, meant for development time. They are meant to sign an app and deploy it to devices that the certificate has access to.
-
-Distribution certs are meant for distributing an app to the store. When an app is signed with a Distribution cert, it can be installed on any device.
-
-
-## Signing the App in Xcode.
-
-After generating the correct certificates, there are options to either have Xcode automatically manage certificates or manually manage them. It's suggested to let Xcode automatically manage certificates. This will make sure that the correct Development and Distribution certs are used, based on the build type selected.
-
-With this option selected, select Archive from the Product > Archive menu. This will build a version of the app that is ready for distribution in the app stores. After archive has been created, Xcode Organizer is opened.
-
-Xcode Organizer displays a list with builds of the current app. Pick the last build and click 'Upload to App Store'. There should be a place to select the team followed by some more information on the app and a "Upload" button to click.
-
-If the upload successfully, the app should be listed on iTunes Connect and listed in 'Activities'. From there, TestFlight can be enabled for beta testing, or the App can be sent for approval from Apple.
-
-
-## Updating the App 
-
-An app can be updated by either submitting a new version to Apple.
-
-NB: In order for the iOS App Store to accept the updated build, the config.xml file will need to be edited to increment the version value, 
-    then rebuild the app for release following the same instructions above.
-
-
-### Submitting to the Google play store:
-
-To generate a release build for Android, build your web app and then run the following cli command
-
-```bash
-npx cap copy && npx cap sync
-```
-
-This will copy all web assets and sync any plugin changes.
-
-Next, open Android studio:
-
-```bash
-npx cap open android
-```
-### To create an AAB binary locally using Android Studio:
-
-* Open the Build menu
-* Choose Generate Signed Bundle / APK
-* Follow the prompts to sign the AAB with your keystore file
-
-[Read more for complete documnetation](https://developer.android.com/studio/publish/app-signing)
-
-Now that a release AAB/APK has been generated, [Google Play Store Developer Console](https://play.google.com/console/developers) is needed to upload to playstore.
-
-* Create an Application (This is already created for Ishihara)
-* Be sure to fill out the description for the app along with providing screenshots and additional info. When ready, upload the signed release 
-  AAB/APK that was generated and publish the app.
-
-## Updating the app
-
-An app can be updated by either submitting a new signed version to the Google Play Store
-
-NB: In order for the Google Play Store to accept updated AAB/APK, the android/app/build.gradle file will need to be edited to increment 
-    the versionCode value, then rebuild the app for release following the instructions above.
+`
+Obs: To automate the incremental number of the versions is used an "Action Secret" with the current production version. For every new release, the "ref_name" property will be used, therefore, the new version
+will have the version defined for release. To be able to do this, is needed a token to update the
+current version on every new release, so it's necessary update this token every time it expires.
+`
