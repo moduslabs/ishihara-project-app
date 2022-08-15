@@ -20,16 +20,24 @@ jobs:
 
       - name: Trigger build Android
         run: >
-            echo BUILDID=$(ionic-cloud build android debug 
+            echo BUILDID=$(ionic-cloud build android release 
             --app-id=${{ secrets.IONIC_APP_ID }} 
-            --env CURRENT_VERSION_ANDROID=${{ secrets.CURRENT_VERSION_ANDROID }} 
-            --commit=${{ github.sha }} --json | jq -r '.buildId') >> $GITHUB_ENV
+            --signing-cert=AndroidProdCertificate
+            --env CURRENT_VERSION_ANDROID=${{ secrets.CURRENT_VERSION_ANDROID }}
+            --commit=${{ github.sha }} --apk --apk-name=ishihara-latest.apk --json | jq -r '.buildId') >> $GITHUB_ENV
 
       - name:
         run: gh auth login --with-token <<< ${{ secrets.TOKEN_UPDATE_SECRET }}
 
       - name: gh set secret
         run: gh secret set CURRENT_VERSION_ANDROID --body ${{ github.ref_name }}
+
+      - name: Trigger deploy Android Internal
+        run: >
+          ionic-cloud deploy android
+          --app-id=${{ secrets.IONIC_APP_ID }}  
+          --build-id=${{ env.BUILDID }} 
+          --destination="AndroidInternal"            
 
   build-ios:
     name: Build iOS

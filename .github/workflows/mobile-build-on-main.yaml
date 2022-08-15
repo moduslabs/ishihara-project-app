@@ -20,7 +20,7 @@ jobs:
             echo BUILDID=$(ionic-cloud build android release 
             --app-id=${{ secrets.IONIC_APP_ID }} 
             --signing-cert=AndroidProdCertificate
-            --env CURRENT_VERSION_ANDROID=${{ secrets.CURRENT_VERSION_ANDROID }} 
+            --env CURRENT_VERSION_ANDROID=${{ secrets.CURRENT_VERSION_ANDROID }}
             --commit=${{ github.sha }} --apk --apk-name=ishihara-latest.apk --json | jq -r '.buildId') >> $GITHUB_ENV
       
       - name: Send APK to Ishihara Group
@@ -29,6 +29,13 @@ jobs:
           -F "initial_comment=Latest apk version"
           -F channels=${{ secrets.SLACK_CHANNEL_ID }}
           -H "Authorization: Bearer ${{ secrets.SLACK_BOT_TOKEN }}"
+
+      - name: Trigger deploy Android Internal
+        run: >
+          ionic-cloud deploy android
+          --app-id=${{ secrets.IONIC_APP_ID }}  
+          --build-id=${{ env.BUILDID }} 
+          --destination="AndroidInternal"          
 
   build-ios:
     name: Build iOS
