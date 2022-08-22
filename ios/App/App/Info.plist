@@ -9,8 +9,6 @@
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
         <string>Ishihara</string>
-  <key>UIDeviceFamily</key>
-  <string>1</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
