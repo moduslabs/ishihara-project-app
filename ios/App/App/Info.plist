@@ -10,7 +10,7 @@
 	<key>CFBundleDisplayName</key>
         <string>Ishihara</string>
   <key>UIDeviceFamily</key>
-  <number>1</number>
+  <string>1</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
