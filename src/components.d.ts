@@ -16,6 +16,9 @@ export namespace Components {
         "to"?: string;
         "value": string | number;
     }
+    interface AppCamera {
+        "expand"?: 'block' | 'full';
+    }
     interface AppLanding {
     }
     interface AppLayout {
@@ -27,6 +30,8 @@ export namespace Components {
     interface AppRoot {
     }
     interface AppSlider {
+    }
+    interface AppUpload {
     }
 }
 export interface AppLayoutCustomEvent<T> extends CustomEvent<T> {
@@ -43,6 +48,12 @@ declare global {
     var HTMLAppButtonElement: {
         prototype: HTMLAppButtonElement;
         new (): HTMLAppButtonElement;
+    };
+    interface HTMLAppCameraElement extends Components.AppCamera, HTMLStencilElement {
+    }
+    var HTMLAppCameraElement: {
+        prototype: HTMLAppCameraElement;
+        new (): HTMLAppCameraElement;
     };
     interface HTMLAppLandingElement extends Components.AppLanding, HTMLStencilElement {
     }
@@ -74,13 +85,21 @@ declare global {
         prototype: HTMLAppSliderElement;
         new (): HTMLAppSliderElement;
     };
+    interface HTMLAppUploadElement extends Components.AppUpload, HTMLStencilElement {
+    }
+    var HTMLAppUploadElement: {
+        prototype: HTMLAppUploadElement;
+        new (): HTMLAppUploadElement;
+    };
     interface HTMLElementTagNameMap {
         "app-button": HTMLAppButtonElement;
+        "app-camera": HTMLAppCameraElement;
         "app-landing": HTMLAppLandingElement;
         "app-layout": HTMLAppLayoutElement;
         "app-result": HTMLAppResultElement;
         "app-root": HTMLAppRootElement;
         "app-slider": HTMLAppSliderElement;
+        "app-upload": HTMLAppUploadElement;
     }
 }
 declare namespace LocalJSX {
@@ -93,6 +112,9 @@ declare namespace LocalJSX {
         "size"?: 'large' | 'small' | 'default';
         "to"?: string;
         "value"?: string | number;
+    }
+    interface AppCamera {
+        "expand"?: 'block' | 'full';
     }
     interface AppLanding {
     }
@@ -108,13 +130,17 @@ declare namespace LocalJSX {
     interface AppSlider {
         "onCurrentSlideIndex"?: (event: AppSliderCustomEvent<number>) => void;
     }
+    interface AppUpload {
+    }
     interface IntrinsicElements {
         "app-button": AppButton;
+        "app-camera": AppCamera;
         "app-landing": AppLanding;
         "app-layout": AppLayout;
         "app-result": AppResult;
         "app-root": AppRoot;
         "app-slider": AppSlider;
+        "app-upload": AppUpload;
     }
 }
 export { LocalJSX as JSX };
@@ -122,11 +148,13 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "app-button": LocalJSX.AppButton & JSXBase.HTMLAttributes<HTMLAppButtonElement>;
+            "app-camera": LocalJSX.AppCamera & JSXBase.HTMLAttributes<HTMLAppCameraElement>;
             "app-landing": LocalJSX.AppLanding & JSXBase.HTMLAttributes<HTMLAppLandingElement>;
             "app-layout": LocalJSX.AppLayout & JSXBase.HTMLAttributes<HTMLAppLayoutElement>;
             "app-result": LocalJSX.AppResult & JSXBase.HTMLAttributes<HTMLAppResultElement>;
             "app-root": LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;
             "app-slider": LocalJSX.AppSlider & JSXBase.HTMLAttributes<HTMLAppSliderElement>;
+            "app-upload": LocalJSX.AppUpload & JSXBase.HTMLAttributes<HTMLAppUploadElement>;
         }
     }
 }
