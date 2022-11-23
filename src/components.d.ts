@@ -16,6 +16,8 @@ export namespace Components {
         "to"?: string;
         "value": string | number;
     }
+    interface AppFeedback {
+    }
     interface AppLanding {
     }
     interface AppLayout {
@@ -43,6 +45,12 @@ declare global {
     var HTMLAppButtonElement: {
         prototype: HTMLAppButtonElement;
         new (): HTMLAppButtonElement;
+    };
+    interface HTMLAppFeedbackElement extends Components.AppFeedback, HTMLStencilElement {
+    }
+    var HTMLAppFeedbackElement: {
+        prototype: HTMLAppFeedbackElement;
+        new (): HTMLAppFeedbackElement;
     };
     interface HTMLAppLandingElement extends Components.AppLanding, HTMLStencilElement {
     }
@@ -76,6 +84,7 @@ declare global {
     };
     interface HTMLElementTagNameMap {
         "app-button": HTMLAppButtonElement;
+        "app-feedback": HTMLAppFeedbackElement;
         "app-landing": HTMLAppLandingElement;
         "app-layout": HTMLAppLayoutElement;
         "app-result": HTMLAppResultElement;
@@ -94,6 +103,8 @@ declare namespace LocalJSX {
         "to"?: string;
         "value"?: string | number;
     }
+    interface AppFeedback {
+    }
     interface AppLanding {
     }
     interface AppLayout {
@@ -110,6 +121,7 @@ declare namespace LocalJSX {
     }
     interface IntrinsicElements {
         "app-button": AppButton;
+        "app-feedback": AppFeedback;
         "app-landing": AppLanding;
         "app-layout": AppLayout;
         "app-result": AppResult;
@@ -122,6 +134,7 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "app-button": LocalJSX.AppButton & JSXBase.HTMLAttributes<HTMLAppButtonElement>;
+            "app-feedback": LocalJSX.AppFeedback & JSXBase.HTMLAttributes<HTMLAppFeedbackElement>;
             "app-landing": LocalJSX.AppLanding & JSXBase.HTMLAttributes<HTMLAppLandingElement>;
             "app-layout": LocalJSX.AppLayout & JSXBase.HTMLAttributes<HTMLAppLayoutElement>;
             "app-result": LocalJSX.AppResult & JSXBase.HTMLAttributes<HTMLAppResultElement>;

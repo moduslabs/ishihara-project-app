@@ -82,6 +82,12 @@ h2 {
   font-weight: 600;
 }
 
+textarea, ion-select {
+  background: #ededed !important;
+  border-radius: 3px;
+  margin-bottom: 20px;
+}
+
 @media only screen and (max-width: 390px) {
   h2 {
     margin-top: 10px;
