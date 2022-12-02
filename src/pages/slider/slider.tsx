@@ -231,6 +231,13 @@ export class SliderPage {
   }
 
   /**
+   * Navigate to feedback page
+   */
+  navigateToFeedback = () => {
+    this.router.push(routes.feedback.url, 'root');
+  };
+
+  /**
    * Due some problems with real devices on "next/go/enter" keyboard,
    * where the keydown wasn't being triggered when the enterkey was with "next"
    * value (default while there're next slides), the property "enterkeyhint"
@@ -241,6 +248,12 @@ export class SliderPage {
   render() {
     return (
       <app-layout shouldHideFooter={this.shouldHideFooter}>
+        <ion-fab vertical="bottom" horizontal="end">
+          <ion-fab-button>
+            <ion-icon name="thumbs-up-outline" onClick={this.navigateToFeedback}></ion-icon>
+          </ion-fab-button>
+        </ion-fab>
+
         <div class="ion-padding">
           <h2>Ishihara Plates Challenge</h2>
           <ion-slides
