@@ -11,6 +11,10 @@ const routes = {
     url: '/page/result',
     component: 'app-result',
   },
+  feedback: {
+    url: '/page/feedback',
+    component: 'app-feedback',
+  },
 };
 
 export default routes;

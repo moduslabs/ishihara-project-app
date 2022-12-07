@@ -1,0 +1,68 @@
+.feedback-btn {
+  margin-top: 30px;
+  display: grid;
+  justify-content: center;
+}
+
+.rating-column {
+	display: flex;
+	justify-content: center;
+}
+.rating-message {
+	display: block;
+	text-align: center;
+	margin-bottom: 16px;
+}
+.error {
+ border: 1px solid red;
+}
+
+ion-textarea {
+    --padding-start: 12px;
+}
+
+.rate-area {
+	float: left;
+	display: revert;
+	padding: 0px;
+	border-style: none;
+	margin-bottom: 0px;
+}
+
+.rate-area:not(:checked) > input {
+	position: absolute;
+	top: -9999px;
+	clip: rect(0, 0, 0, 0);
+}
+
+.rate-area:not(:checked) > ion-label {
+	float: right;
+	width: 1em;
+	overflow: hidden;
+	white-space: nowrap;
+	cursor: pointer;
+	font-size: 180%;
+	color: lightgrey;
+}
+
+.rate-area:not(:checked) > ion-label:before {
+	content: "★";
+}
+
+.rate-area > input:checked ~ ion-label {
+	color: gold;
+}
+
+.rate-area:not(:checked) > ion-label:hover,
+.rate-area:not(:checked) > ion-label:hover ~ ion-label {
+	color: gold;
+}
+
+.rate-area > input:checked + ion-label:hover,
+.rate-area > input:checked + ion-label:hover ~ ion-label,
+.rate-area > input:checked ~ ion-label:hover,
+.rate-area > input:checked ~ ion-label:hover ~ ion-label,
+.rate-area > ion-label:hover ~ input:checked ~ ion-label {
+	color: gold;
+}
+
