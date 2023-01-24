@@ -6,6 +6,8 @@ import routes from '../../helpers/routes';
 import { Plate } from '../../types/plate';
 import { toastController, alertController } from '@ionic/core';
 import { SlideChangeDirection, SliderInputState } from '../../types/slider';
+import { Screenshot } from '@ionic-native/screenshot';
+import { IdService } from '../../helpers/idService';
 
 @Component({
   tag: 'app-slider',
@@ -234,7 +236,27 @@ export class SliderPage {
    * Navigate to feedback page
    */
   navigateToFeedback = () => {
-    this.router.push(routes.feedback.url, 'root');
+    // this.router.push(routes.feedback.url, 'root');
+
+  //   Screenshot.take().then((ret: { base64: string }) => {
+  //     console.log(ret.base64); // or `data:image/png;base64,${ret.base64}`
+  // });
+//  const id =  new IdService().generate();
+//   Screenshot.save('jpg', 80, id + '.jpg').then((onSuccess=>{
+//     console.log(onSuccess); // will be true if it worked
+//     alert(JSON.stringify(onSuccess));
+//   }), (onError)=>{
+//     alert(JSON.stringify(onError));
+//     console.log(onError); // will be an error if it didn't work
+//   });
+
+  Screenshot.URI(80).then((onSuccess=>{
+    console.log(onSuccess); // will be true if it worked
+    alert(JSON.stringify(onSuccess));
+  }), (onError)=>{
+    alert(JSON.stringify(onError));
+    console.log(onError); // will be an error if it didn't work
+  });
   };
 
   /**
