@@ -8,6 +8,7 @@ const { state, onChange } = createStore({
     previous: null,
   },
   loadingPlates: false,
+  screenshotPath: null
 });
 
 onChange('plates', value => {

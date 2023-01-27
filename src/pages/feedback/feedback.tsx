@@ -1,5 +1,7 @@
 import { alertController } from '@ionic/core';
 import { Component, h, State } from '@stencil/core';
+import { sendFeedback } from '../../helpers/feedback';
+// import state from '../../store';
 import { FeedbackFormErrorType } from './feedback.types';
 
 @Component({
@@ -11,7 +13,7 @@ export class FeedbackPage {
 
   @State() selectEmail: string;
   @State() selectName: string;
-  @State() selectRating: string = "3";
+  @State() selectRating: string = "5";
   @State() ratingMessage: string;
   @State() feedbackMessage: string;
   @State() formErrors: FeedbackFormErrorType =  {
@@ -21,14 +23,12 @@ export class FeedbackPage {
   };
 
 
+  get disableSubmit() {
+    return !this.selectName || !this.selectEmail || !this.feedbackMessage;
+  }
+
   async handleSubmit(e) {
     e.preventDefault();
-    const feedbackData = {
-      name: this.selectName,
-      email: this.selectEmail,
-      rating: this.selectRating,
-      message: this.feedbackMessage
-    };
     // Validate form
     if (this.formErrors.selectName || this.formErrors.selectEmail || this.formErrors.feedbackMessage) {
       const alert = await alertController.create({
@@ -49,33 +49,46 @@ export class FeedbackPage {
       await alert.present();
       return;
     }
-    // TODO: send feedback data to server
-    console.log(feedbackData);
-
-    // show an alert message from stencil
-    const alert = await alertController.create({
-      header: 'Thank you!',
-      message: 'We have successfully received your feedback!',
-      buttons: [
-        {
-          text: 'Ok',
-          handler: () => {
-            let transition = alert.dismiss();
-            transition.then(() => {
-              // clear all data
-              this.selectName = '';
-              this.selectEmail = '';
-              this.selectRating = '';
-              this.ratingMessage = '';
-              this.feedbackMessage = '';
-            });
+    //
+    const feedbackData = {
+      name: this.selectName,
+      email: this.selectEmail,
+      rating: this.selectRating,
+      message: this.feedbackMessage,
+      // imageBucketId: await uploadFileToS3(state.screenshotPath)
+    };
+    const response = await sendFeedback(feedbackData);
+    if (response.ok) {
+      // show an alert message from stencil
+      const alert = await alertController.create({
+        header: 'Thank you!',
+        message: 'We have successfully received your feedback!',
+        buttons: [
+          {
+            text: 'Ok',
+            handler: () => {
+              let transition = alert.dismiss();
+              transition.then(() => {
+                // clear all data
+                this.selectName = '';
+                this.selectEmail = '';
+                this.selectRating = '';
+                this.ratingMessage = '';
+                this.feedbackMessage = '';
+              });
+            },
           },
-        },
-      ],
-    });
-
-    await alert.present(); 
-    
+        ],
+      });
+      await alert.present(); 
+    } else {
+      const alert = await alertController.create({
+        header: 'Error',
+        message: 'Something went wrong. Please try again later',
+        buttons: ['OK']
+      });
+      await alert.present();
+    }
   }
 
   handleName(event) {
@@ -161,7 +174,7 @@ export class FeedbackPage {
               </ion-col>
             </ion-row>
           <ion-row class="feedback-btn">
-            <ion-button class="feedback-btn" type='submit' shape='round'  expand="block"> Submit</ion-button>
+            <ion-button disabled={this.disableSubmit} class="feedback-btn" type='submit' shape='round' expand="block">Submit</ion-button>
           </ion-row>
           </form>
         </div>

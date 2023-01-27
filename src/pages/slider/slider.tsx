@@ -236,27 +236,13 @@ export class SliderPage {
    * Navigate to feedback page
    */
   navigateToFeedback = () => {
-    // this.router.push(routes.feedback.url, 'root');
-
-  //   Screenshot.take().then((ret: { base64: string }) => {
-  //     console.log(ret.base64); // or `data:image/png;base64,${ret.base64}`
-  // });
-//  const id =  new IdService().generate();
-//   Screenshot.save('jpg', 80, id + '.jpg').then((onSuccess=>{
-//     console.log(onSuccess); // will be true if it worked
-//     alert(JSON.stringify(onSuccess));
-//   }), (onError)=>{
-//     alert(JSON.stringify(onError));
-//     console.log(onError); // will be an error if it didn't work
-//   });
-
-  Screenshot.URI(80).then((onSuccess=>{
-    console.log(onSuccess); // will be true if it worked
-    alert(JSON.stringify(onSuccess));
-  }), (onError)=>{
-    alert(JSON.stringify(onError));
-    console.log(onError); // will be an error if it didn't work
-  });
+    const id =  new IdService().generate();
+    Screenshot.save('jpg', 80, id + '.jpg').then((data=>{
+      state.screenshotPath = data.filePath;
+      this.router.push(routes.feedback.url, 'root');
+    })).catch((error)=>{
+      console.log(error); // will be an error if it didn't work
+    });
   };
 
   /**
